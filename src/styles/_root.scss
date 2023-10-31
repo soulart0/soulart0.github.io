@@ -1,0 +1,25 @@
+:root {
+    // Colors
+    --color-black: #06010A;
+    --color-white: #FFFFFF;
+    --color-gray: #EFEFEF;
+    --color-dark-gray: #A2A2A2;
+    --color-darker-gray: #9F9F9F;
+    --color-darkest-gray: #696969;
+    --color-green: #{$primary-base-color};
+    --color-red: #D90000;
+    --color-blue: #00F0FF;
+
+    --primary-base-color: #{$primary-base-color};
+    --primary-light-color: #{lighten($primary-base-color, 10%)};
+    --primary-dark-color: #{darken($primary-base-color, 10%)};
+    --secondary-base-color: #{$secondary-base-color};
+
+    // Font
+    --font-main-color: var(--color-white);
+    --font-size-base: 16px;
+    --font-size-base-mobile: 12px;
+    --font-akira: "akira_expanded", "Nunito", sans-serif;
+    --font-cairo: "cairo", "Nunito", sans-serif;
+    --font-rubik: "rubik", "Nunito", sans-serif;
+}
