@@ -1,6 +1,6 @@
-# palestine101
+# SOUL ART: Cutting and Printing Price Calculator
 
-This template should help get you started developing with Vue 3 in Vite.
+A multilingual website to automate the cutting and printing price calculation.
 
 ## Recommended IDE Setup
 
@@ -32,4 +32,33 @@ npm run build
 
 ```sh
 npm run lint
+```
+
+## To Add new language
+
+1. Add the language locale code to the `VITE_SUPPORTED_LOCALES` environment variable under `.env` file like
+
+```
+VITE_SUPPORTED_LOCALES=en,ar,LANG
+```
+
+2. Add alternate link to the new language in `<head>` of the `index.html` file
+
+```html
+<link rel="alternate" hreflang="LANG" href="https://palestine101.3knights.tech/LANG" >
+```
+
+3. Create new json file under `src/i18n/locales` with the name of `LANG.json`, containing the translation of the language
+
+4. Add the language label into the other languages' locale file, at least on `en.json`, example
+
+```json
+{
+    "locale": {
+        "ar": "Arabic",
+        "en": "English",
+        "LANG": "Language Label"
+    },
+    ...
+}
 ```

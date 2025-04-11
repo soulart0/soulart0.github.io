@@ -1,0 +1,82 @@
+{
+    "seo": {
+        "title": "SOUL ART: Printing & Cutter Plotter Price Calculator",
+        "description": "Automatic price calculator for printing and cutting with a cutter plotter. Calculate costs instantly and submit your order directly!",
+        "keywords": "SOUL ART, Printing, Price Calculator, Cutter Plotter, Cutting, Automated Printing Quote"
+    },
+    "scroll": "Scroll down",
+    "footer": {
+        "our-store": "Visit our online store"
+    },
+    "general": {
+        "or": "or",
+        "and": "and",
+        "yes": "Yes",
+        "no": "No",
+        "in-the-side": "in the side",
+        "select": "Select",
+        "enter": "Enter",
+        "width": "width",
+        "height": "height"
+    },
+    "units": {
+        "cm": "cm",
+        "piece": "pieces",
+        "quarter": "quarters",
+        "currency": "EGP"
+    },
+    "calculator": {
+        "choose-an-operation": "What do you need to do?",
+        "operations": {
+            "cutting-only": "Cutter Plotter Only",
+            "printing-only": "Printing Only",
+            "printing-and-cutting": "Printing and Cutter Plotter"
+        },
+        "options": {
+            "piece-size": "Piece Size",
+            "pieces-number": "Number of Pieces",
+            "quarters-number": "Number of Quarters",
+            "paper-type": "Paper Type",
+            "printing-type": "Printing Type",
+            "customer-supplied-paper": "Will you provide the printing paper?",
+            "cellophane-coated-paper": "Coat the paper with cellophane?"
+        },
+        "paper-types": {
+            "couche-350g": "Couché 350g",
+            "couche-150-250g": "Couché 150/250g",
+            "sticker": "Sticker"
+        },
+        "printing-types": {
+            "single-sided": "Single Sided",
+            "double-sided": "Double Sided"
+        },
+        "boolean-options": {
+            "yes": "Yes",
+            "no": "No"
+        }
+    },
+    "errors": {
+        "min-piece-size": "The minimum piece {dimension} is {value}cm.",
+        "max-piece-size": "The maximum piece {dimension} is {value}cm.",
+        "not-a-number": "Please enter a valid number.",
+        "min-pieces-number": "The minimum number of pieces is {value}.",
+        "min-quarters-number": "The minimum number of quarters is {value}."
+    },
+    "invoice": {
+        "title": "Order Details",
+        "order-type": "Order Type",
+        "customer-supplied-paper": "Customer Paper",
+        "cellophane-coated-paper": "Cellophane-Coated",
+        "pieces-per-quarter": "Pieces per Quarter",
+        "price": {
+            "details": "Price Details",
+            "quarter": {
+                "printing": "Quarter Printing Price",
+                "cutting": "Quarter Cutting Price",
+                "total": "Quarter Total Price"
+            },
+            "total": "Total Price"
+        }
+    },
+    "send-order-via-whatsapp": "Send Order via WhatsApp"
+}

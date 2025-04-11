@@ -1,0 +1,37 @@
+:root {
+    --lang-selector-animation-duration: 1.5s;
+    --lang-selector-animation-delay: 0s;
+}
+
+.ComboButtons {
+    &-Container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 3rem;
+        opacity: 0;
+
+        @include tablet-and-mobile {
+            gap: 1.5rem;
+        }
+
+        &_inView {
+            animation: go-up var(--lang-selector-animation-duration) forwards ease-out
+                var(--lang-selector-animation-delay) 1 normal;
+        }
+    }
+}
+
+@keyframes go-up {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

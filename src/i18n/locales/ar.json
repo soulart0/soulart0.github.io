@@ -1,0 +1,93 @@
+{
+    "locale": {
+        "ar": {
+            "name": "العربية",
+            "dir": "rtl"
+        },
+        "en": {
+            "name": "English",
+            "dir": "ltr"
+        }
+    },
+    "seo": {
+        "title": "سول آرت: حاسبة أسعار الطباعة وقص كاتر بلوتر",
+        "description": "حاسبة الأسعار الآلية للطباعة والقص باستخدام الكاتر بلوتر. احسب التكلفة تلقائيًا، وأرسل طلبك مباشرةً!",
+        "keywords": "سول آرت، حاسبة أسعار، الطباعة، قص كاتر بلوتر، طباعة تلقائية، إرسال الطلب"
+    },
+    "scroll": "إنزل لتحت",
+    "footer": {
+        "our-store": "زوروا متجرنا الالكتروني"
+    },
+    "general": {
+        "or": "أو",
+        "and": "و",
+        "yes": "نعم",
+        "no": "لا",
+        "in-the-side": "في الضلع",
+        "select": "اختر",
+        "enter": "أدخل",
+        "width": "عرض",
+        "height": "ارتفاع"
+    },
+    "units": {
+        "cm": "سم",
+        "g": "جرام",
+        "piece": "قطعة",
+        "quarter": "ربع",
+        "currency": "جنيه"
+    },
+    "calculator": {
+        "choose-an-operation": "محتاج تعمل ايه؟",
+        "operations": {
+            "cutting-only": "قص كاتر بلوتر بس",
+            "printing-only": "طباعة بس",
+            "printing-and-cutting": "طباعة وقص كاتر بلوتر"
+        },
+        "options": {
+            "piece-size": "مقاس القطعة",
+            "pieces-number": "عدد القطع",
+            "quarters-number": "عدد الأرباع",
+            "paper-type": "نوع الورق",
+            "printing-type": "نوع الطباعة",
+            "customer-supplied-paper": "هتوفر ورق الطباعة؟",
+            "cellophane-coated-paper": "الورق متغلف بسولوفان؟"
+        },
+        "paper-types": {
+            "couche-350g": "كوشيه 350 جرام",
+            "couche-150-250g": "كوشيه 150/250 جرام",
+            "sticker": "استيكر"
+        },
+        "printing-types": {
+            "single-sided": "وجه واحد",
+            "double-sided": "وجهين"
+        },
+        "boolean-options": {
+            "yes": "نعم",
+            "no": "لا"
+        }
+    },
+    "errors": {
+        "min-piece-size": "الحد الأدنى ل{dimension} القطعة هو {value} سم.",
+        "max-piece-size": "الحد الأقصى ل{dimension} القطعة هو {value} سم.",
+        "not-a-number": "يرجى إدخال رقم صحيح.",
+        "min-pieces-number": "الحد الأدنى لعدد القطع هو {value}.",
+        "min-quarters-number": "الحد الأدنى لعدد الأرباع هو {value}."
+    },
+    "invoice": {
+        "title": "تفاصيل الطلب",
+        "order-type": "نوع الطلب",
+        "customer-supplied-paper": "ورق العميل",
+        "cellophane-coated-paper": "تغليف سولوفان",
+        "pieces-per-quarter": "عدد القطع في الربع",
+        "price": {
+            "details": "تفاصيل السعر",
+            "quarter": {
+                "printing": "سعر طباعة الربع",
+                "cutting": "سعر قص الربع",
+                "total": "السعر الإجمالي للربع"
+            },
+            "total": "السعر الإجمالي"
+        }
+    },
+    "send-order-via-whatsapp": "إبعت الطلب على الواتساب"
+}

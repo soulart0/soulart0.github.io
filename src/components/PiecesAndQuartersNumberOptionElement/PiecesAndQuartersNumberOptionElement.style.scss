@@ -1,0 +1,114 @@
+.PiecesAndQuartersNumberOptionElement {
+    &-Content {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+        width: 60%;
+        transition: all 0.5s;
+
+        @include tablet-and-mobile {
+            width: 90%;
+            flex-direction: column;
+        }
+    }
+
+    &-InputWrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0.5rem;
+        border: 2px solid var(--color-gray);
+        box-shadow: 0px 0px 7px var(--color-gray);
+        height: 3.5rem;
+        transition: all 0.5s;
+
+        &:focus-within {
+            box-shadow: 0px 0px 7px var(--primary-base-color);
+        }
+
+        @include tablet-and-mobile {
+            width: 100%;
+            height: 4rem;
+        }
+
+        &_disabled {
+            box-shadow: 0px 0px 7px var(--color-dark-gray);
+            background: var(--color-dark-gray);
+            color: var(--color-white);
+        }
+    }
+
+    &-Switch {
+        height: 3.5rem;
+        min-width: 3.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem;
+
+        & svg {
+            height: 100%;
+            aspect-ratio: 1;
+            transition: all 0.5s;
+
+            @include tablet-and-mobile {
+                -webkit-transform: rotate(90deg);
+                -moz-transform: rotate(90deg);
+                -o-transform: rotate(90deg);
+                transform: rotate(90deg);
+            }
+        }
+
+        &_rotate {
+            & svg {
+                -webkit-transform: scaleX(-1);
+                -moz-transform: scaleX(-1);
+                -o-transform: scaleX(-1);
+                transform: scaleX(-1);
+
+                @include tablet-and-mobile {
+                    -webkit-transform: scaleY(-1) rotate(90deg);
+                    -moz-transform: scaleY(-1) rotate(90deg);
+                    -o-transform: scaleY(-1) rotate(90deg);
+                    transform: scaleY(-1) rotate(90deg);
+                }
+            }
+        }
+    }
+
+    &-Input {
+        height: 100%;
+        box-shadow: inset 0px 0px 6px var(--color-dark-gray);
+        border-left: 2px solid var(--color-gray);
+        border-top-right-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+        font-size: 1.8rem;
+        font-size: clamp(1.4rem, 1.14rem + 0.3vw, 1.8rem);
+        line-height: normal;
+        text-align: center;
+        transition: all 0.5s;
+        width: 70%;
+
+        html[dir='ltr'] & {
+            border-right: 2px solid var(--color-gray);
+            border-left: none;
+            border-radius: 0;
+            border-top-left-radius: 0.5rem;
+            border-bottom-left-radius: 0.5rem;
+        }
+
+        &:focus {
+            box-shadow: inset 0px 0px 6px var(--primary-base-color);
+        }
+    }
+
+    &-Label {
+        user-select: none;
+        padding: 0 0.5rem;
+        text-align: center;
+        width: 30%;
+    }
+}
