@@ -1,0 +1,143 @@
+:root {
+    --main-line-color: hsl(234, 62%, 86%);
+    --side-line-color: hsl(350, 100%, 91%);
+    --paper-color: hsl(0, 15%, 95%);
+    --ink-color: hsl(0, 0%, 12%);
+    --line-thickness: 2px;
+    --top-space: 3lh;
+}
+
+.InvoicePreview {
+    &-Wrapper {
+        width: 50%;
+        margin: 2rem auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        background: var(--paper-color);
+        padding: var(--top-space) 3rem 1rem 5rem;
+        font-family: system-ui;
+        font-size: 1.5rem;
+        font-size: clamp(1.2rem, 1.14rem + 0.3vw, 1.5rem);
+        line-height: 1.6;
+        color: var(--ink-color);
+        background-image:
+            /* the red line */
+            linear-gradient(
+                90deg,
+                transparent,
+                transparent 4rem,
+                var(--side-line-color) 4rem,
+                var(--side-line-color) 4.25rem,
+                transparent 4.25rem
+            ),
+            /*  The top space  */
+                linear-gradient(
+                    var(--paper-color),
+                    var(--paper-color) var(--top-space),
+                    transparent var(--top-space)
+                ),
+            /* the blue lines */
+                repeating-linear-gradient(
+                    transparent,
+                    transparent calc(1lh - var(--line-thickness)),
+                    var(--main-line-color) calc(1lh - var(--line-thickness)),
+                    var(--main-line-color) 1lh,
+                    transparent 1lh
+                );
+        box-shadow: 0 0 1rem rgb(0 0 0 / 0.25);
+
+        html[dir='rtl'] & {
+            padding: calc(var(--top-space) - 0.4lh) 5rem 1rem 3rem;
+            background-image:
+            /* the red line */
+                linear-gradient(
+                    270deg,
+                    transparent,
+                    transparent 4rem,
+                    var(--side-line-color) 4rem,
+                    var(--side-line-color) 4.25rem,
+                    transparent 4.25rem
+                ),
+                /*  The top space  */
+                    linear-gradient(
+                        var(--paper-color),
+                        var(--paper-color) var(--top-space),
+                        transparent var(--top-space)
+                    ),
+                /* the blue lines */
+                    repeating-linear-gradient(
+                        transparent,
+                        transparent calc(1lh - var(--line-thickness)),
+                        var(--main-line-color) calc(1lh - var(--line-thickness)),
+                        var(--main-line-color) 1lh,
+                        transparent 1lh
+                    );
+        }
+
+        @include tablet-and-mobile {
+            width: 100%;
+            margin: 0 auto;
+            font-size: 1.3rem;
+            font-size: clamp(1.3rem, 1.14rem + 0.3vw, 1.5rem);
+        }
+    }
+
+    &-Header {
+        font-size: 2rem;
+        font-size: clamp(1.5rem, 1.4rem + 0.5vw, 2rem);
+        text-transform: capitalize;
+        text-align: center;
+        line-height: 1.6;
+
+        @include tablet-and-mobile {
+            font-size: 1.5rem;
+            font-size: clamp(1.5rem, 1.4rem + 0.5vw, 2rem);
+        }
+    }
+
+    &-InvoiceTable {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1.2rem;
+
+        td {
+            &:first-child {
+                font-weight: bold;
+                width: 35%;
+                border-left: var(--line-thickness) solid var(--ink-color);
+
+                html[dir='ltr'] & {
+                    border-left: none;
+                    border-right: var(--line-thickness) solid var(--ink-color);
+                }
+
+                @include tablet-and-mobile {
+                    width: 40%;
+                }
+            }
+
+            &:last-child {
+                padding-right: 1rem;
+
+                html[dir='ltr'] & {
+                    padding-right: 0;
+                    padding-left: 1rem;
+                }
+            }
+        }
+    }
+
+    &-TotalRow {
+        td {
+            font-weight: bold;
+            border-top: var(--line-thickness) solid var(--ink-color);
+
+            &:last-child {
+                color: var(--primary-base-color);
+            }
+        }
+    }
+}

@@ -1,0 +1,18 @@
+.CalculatorSection {
+    &-Wrapper {
+        border-top: 0.8px solid rgba(255, 255, 255, 0.5);
+        padding: 2rem 1rem;
+
+        &_double {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+
+            @include tablet-and-mobile {
+                flex-direction: column;
+            }
+        }
+    }
+}

@@ -1,0 +1,37 @@
+.BrandLogo {
+    &-Wrapper {
+        opacity: 0;
+        height: 100%;
+        width: 100%;
+        padding: 1rem 2.5rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 1rem;
+        animation: drop-down var(--subtitle-animation-duration) forwards ease-out
+            var(--subtitle-animation-delay) 1 normal;
+        direction: rtl;
+        unicode-bidi: embed;
+
+        @include tablet-and-mobile {
+            justify-content: center;
+        }
+    }
+
+    &-Logo {
+        height: 75%;
+    }
+}
+
+@keyframes drop-down {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

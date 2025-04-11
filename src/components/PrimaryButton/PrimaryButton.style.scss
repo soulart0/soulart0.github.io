@@ -1,0 +1,56 @@
+.PrimaryButton {
+    font-family: var(--font-cairo);
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 1.14rem + 0.3vw, 1.5rem);
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--color-white);
+    padding: 12px 24px;
+    outline: none;
+    background: var(--color-dark-gray);
+    transition: all 0.5s;
+    box-shadow: 0px 0px 7px var(--color-darker-gray);
+
+    html[dir='ltr'] & {
+        letter-spacing: 3.6px;
+    }
+
+    @include tablet-and-mobile {
+        font-size: 1.2rem;
+        font-size: clamp(1.2rem, 1.14rem + 0.3vw, 1.5rem);
+    }
+
+    &:hover {
+        background: var(--primary-base-color);
+    }
+
+    &_active {
+        background: var(--primary-base-color);
+        box-shadow: 0px 1px 16px 2px var(--secondary-light-color);
+
+        &:hover {
+            background: var(--primary-dark-color);
+            box-shadow: 0px 1px 10px 2px var(--secondary-dark-color);
+        }
+
+        &_combobox {
+            cursor: default;
+        }
+    }
+
+    &_inversed {
+        html[dir='rtl'] & {
+            letter-spacing: 3.6px;
+        }
+
+        html[dir='ltr'] & {
+            letter-spacing: 0;
+        }
+    }
+}
