@@ -3,7 +3,7 @@ import { defineModel, ref, watch, computed } from 'vue'
 import PieceSizeOptionElement from 'components/PieceSizeOptionElement/PieceSizeOptionElement.vue'
 import PiecesAndQuartersNumberOptionElement from 'components/PiecesAndQuartersNumberOptionElement/PiecesAndQuartersNumberOptionElement.vue'
 import SelectOptionElement from 'components/SelectOptionElement/SelectOptionElement.vue'
-import { OPERATIONS, OPS } from '@/constants/operations'
+import { OPS } from '@/constants/operations'
 import {
     OPTIONS,
     PAPER_TYPES,
@@ -30,11 +30,7 @@ const isSyncUpdate = ref(false)
 const visibleOptions = computed(() => {
     const ops = []
 
-    if (props.operation.ops[OPS.CUTTING]) {
-        ops.push('pieceSize')
-    }
-
-    ops.push('piecesAndQuarters')
+    ops.push('pieceSize', 'piecesAndQuarters')
 
     if (props.operation.ops[OPS.PRINTING]) {
         ops.push('paperType')
@@ -57,14 +53,6 @@ const optionNumbers = computed(() => {
     }, {})
 })
 
-watch(
-    () => props.operation,
-    (value) => {
-        if (value.key === OPERATIONS.PRINTING_ONLY.key) {
-            isUserEnteredQuartersNumber.value = true
-        }
-    }
-)
 watch(
     () => options.value.PAPER_TYPE,
     (newPapertype) => {
@@ -159,49 +147,23 @@ watch(
 
 <template>
     <div :class="bem({ element: 'Wrapper' })">
-        <PieceSizeOptionElement
-            v-if="operation.ops[OPS.CUTTING]"
-            :number="optionNumbers.pieceSize"
-            v-model="options.PIECE_SIZE"
-        />
-        <PiecesAndQuartersNumberOptionElement
-            :number="optionNumbers.piecesAndQuarters"
-            :operation="operation.ops"
-            v-model:piecesNumber="options.PIECES_NUMBER"
-            v-model:quartersNumber="options.QUARTERS_NUMBER"
-            v-model:isUserEnteredQuartersNumber="isUserEnteredQuartersNumber"
-        />
-        <SelectOptionElement
-            v-if="operation.ops[OPS.PRINTING]"
-            :number="optionNumbers.paperType"
-            :optionKey="OPTIONS.PAPER_TYPE.key"
-            :types="PAPER_TYPES"
-            v-model="options.PAPER_TYPE"
-        />
-        <SelectOptionElement
-            v-if="
-                operation.ops[OPS.PRINTING] &&
-                !ONE_SIDED_ONLY_PAPER_TYPES.includes(options.PAPER_TYPE)
-            "
-            :number="optionNumbers.printingType"
-            :optionKey="OPTIONS.PRINTING_TYPE.key"
-            :types="PRINTING_TYPES"
-            v-model="options.PRINTING_TYPE"
-        />
-        <SelectOptionElement
-            v-if="operation.ops[OPS.PRINTING]"
-            :number="optionNumbers.customerPaper"
-            :optionKey="OPTIONS.CUSTOMER_SUPPLIED_PAPER.key"
-            :types="CUSTOMER_SUPPLIED_PAPER_TYPES"
-            v-model="options.CUSTOMER_SUPPLIED_PAPER"
-        />
-        <SelectOptionElement
-            v-if="operation.ops[OPS.PRINTING]"
-            :number="optionNumbers.cellophaneCoatedPaper"
-            :optionKey="OPTIONS.CELLOPHANE_COATED_PAPER.key"
-            :types="CELLOPHANE_COATED_PAPER_TYPES"
-            v-model="options.CELLOPHANE_COATED_PAPER"
-        />
+        <PieceSizeOptionElement :number="optionNumbers.pieceSize" v-model="options.PIECE_SIZE" />
+        <PiecesAndQuartersNumberOptionElement :number="optionNumbers.piecesAndQuarters"
+            v-model:piecesNumber="options.PIECES_NUMBER" v-model:quartersNumber="options.QUARTERS_NUMBER"
+            v-model:isUserEnteredQuartersNumber="isUserEnteredQuartersNumber" />
+        <SelectOptionElement v-if="operation.ops[OPS.PRINTING]" :number="optionNumbers.paperType"
+            :optionKey="OPTIONS.PAPER_TYPE.key" :types="PAPER_TYPES" v-model="options.PAPER_TYPE" />
+        <SelectOptionElement v-if="
+            operation.ops[OPS.PRINTING] &&
+            !ONE_SIDED_ONLY_PAPER_TYPES.includes(options.PAPER_TYPE)
+        " :number="optionNumbers.printingType" :optionKey="OPTIONS.PRINTING_TYPE.key" :types="PRINTING_TYPES"
+            v-model="options.PRINTING_TYPE" />
+        <SelectOptionElement v-if="operation.ops[OPS.PRINTING]" :number="optionNumbers.customerPaper"
+            :optionKey="OPTIONS.CUSTOMER_SUPPLIED_PAPER.key" :types="CUSTOMER_SUPPLIED_PAPER_TYPES"
+            v-model="options.CUSTOMER_SUPPLIED_PAPER" />
+        <SelectOptionElement v-if="operation.ops[OPS.PRINTING]" :number="optionNumbers.cellophaneCoatedPaper"
+            :optionKey="OPTIONS.CELLOPHANE_COATED_PAPER.key" :types="CELLOPHANE_COATED_PAPER_TYPES"
+            v-model="options.CELLOPHANE_COATED_PAPER" />
     </div>
 </template>
 

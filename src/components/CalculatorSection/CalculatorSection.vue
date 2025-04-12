@@ -6,7 +6,7 @@ import OperationSelector from 'components/OperationSelector/OperationSelector.vu
 import QuarterPreview from 'components/QuarterPreview/QuarterPreview.vue'
 import SendOrder from 'components/SendOrder/SendOrder.vue'
 
-import { DEFAULT_OPERATION, OPS } from '@/constants/operations'
+import { DEFAULT_OPERATION } from '@/constants/operations'
 import { DEFAULT_OPTIONS } from '@/constants/options'
 
 const operation = ref(DEFAULT_OPERATION)
@@ -28,21 +28,12 @@ const results = ref({
             <OperationSelector v-model="operation" />
         </div>
         <div :class="bem({ element: 'Wrapper' })">
-            <CalculatorForm
-                v-model:options="options"
-                v-model:results="results"
-                :operation="operation"
-            />
+            <CalculatorForm v-model:options="options" v-model:results="results" :operation="operation" />
         </div>
         <div :class="bem({ element: 'Wrapper', mod: { double: true } })">
             <InvoicePreview :results="results" :operation="operation" :options="options" />
-            <QuarterPreview
-                v-if="operation.ops[OPS.CUTTING]"
-                :piecesPerRow="results.piecesPerRow"
-                :piecesPerColumn="results.piecesPerColumn"
-                :pieceSize="options.PIECE_SIZE"
-                :paperType="options.PAPER_TYPE"
-            />
+            <QuarterPreview :piecesPerRow="results.piecesPerRow" :piecesPerColumn="results.piecesPerColumn"
+                :pieceSize="options.PIECE_SIZE" :paperType="options.PAPER_TYPE" />
         </div>
         <SendOrder :results="results" :operation="operation" :options="options" />
     </div>

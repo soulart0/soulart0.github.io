@@ -3,7 +3,6 @@ import { defineModel, ref, watch } from 'vue'
 import { i18n } from '@/i18n'
 import OptionElement from 'components/OptionElement/OptionElement.vue'
 import PrimaryButton from 'components/PrimaryButton/PrimaryButton.vue'
-import { OPS } from '@/constants/operations'
 import { OPTIONS } from '@/constants/options'
 import { MIN_PIECES_NUMBER, MIN_QUARTERS_NUMBER } from '@/constants/options'
 import { validateNumber } from '@/utils/validation'
@@ -11,10 +10,6 @@ import { validateNumber } from '@/utils/validation'
 defineProps({
     number: {
         type: Number,
-        required: true
-    },
-    operation: {
-        type: Object,
         required: true
     }
 })
@@ -86,76 +81,37 @@ watch(
     <OptionElement :class="bem({})" :number="number" :error="error">
         <template #header>
             {{ $t('general.enter') }}
-            <span v-if="operation[OPS.CUTTING]">
-                {{ $t(`calculator.options.${OPTIONS.PIECES_NUMBER.key}`) }} {{ $t('general.or') }}
-                {{ $t(`calculator.options.${OPTIONS.QUARTERS_NUMBER.key}`) }}
-            </span>
-            <span v-else>
-                {{ $t(`calculator.options.${OPTIONS.QUARTERS_NUMBER.key}`) }}
-            </span>
+            {{ $t(`calculator.options.${OPTIONS.PIECES_NUMBER.key}`) }} {{ $t('general.or') }}
+            {{ $t(`calculator.options.${OPTIONS.QUARTERS_NUMBER.key}`) }}
         </template>
 
         <div :class="bem({ element: 'Content' })">
-            <div
-                :class="
-                    bem({ element: 'InputWrapper', mod: { disabled: isUserEnteredQuartersNumber } })
-                "
-                v-if="operation[OPS.CUTTING]"
-            >
-                <input
-                    :class="bem({ element: 'Input' })"
-                    type="number"
-                    v-model="piecesNumber"
-                    @input="isUserInput = true"
-                    @blur="validatePiecesNumber(piecesNumber, true)"
-                    :disabled="isUserEnteredQuartersNumber"
-                />
+            <div :class="bem({ element: 'InputWrapper', mod: { disabled: isUserEnteredQuartersNumber } })
+                ">
+                <input :class="bem({ element: 'Input' })" type="number" v-model="piecesNumber"
+                    @input="isUserInput = true" @blur="validatePiecesNumber(piecesNumber, true)"
+                    :disabled="isUserEnteredQuartersNumber" />
                 <span :class="bem({ element: 'Label' })"> {{ ' ' + $t(`units.piece`) }} </span>
             </div>
-            <PrimaryButton
-                :class="bem({ element: 'Switch', mod: { rotate: isUserEnteredQuartersNumber } })"
-                v-if="operation[OPS.CUTTING]"
-                @click="isUserEnteredQuartersNumber = !isUserEnteredQuartersNumber"
-            >
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    stroke="#ffffff"
-                >
+            <PrimaryButton :class="bem({ element: 'Switch', mod: { rotate: isUserEnteredQuartersNumber } })"
+                @click="isUserEnteredQuartersNumber = !isUserEnteredQuartersNumber">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                    <g
-                        id="SVGRepo_tracerCarrier"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    ></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                     <g id="SVGRepo_iconCarrier">
-                        <path
-                            d="M18 10L21 7M21 7L18 4M21 7H7M6 14L3 17M3 17L6 20M3 17H17"
-                            stroke="#fff"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        ></path>
+                        <path d="M18 10L21 7M21 7L18 4M21 7H7M6 14L3 17M3 17L6 20M3 17H17" stroke="#fff"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </g>
                 </svg>
             </PrimaryButton>
-            <div
-                :class="
-                    bem({
-                        element: 'InputWrapper',
-                        mod: { disabled: !isUserEnteredQuartersNumber }
-                    })
-                "
-            >
-                <input
-                    :class="bem({ element: 'Input' })"
-                    type="number"
-                    v-model="quartersNumber"
-                    @input="isUserInput = true"
-                    @blur="validateQuartersNumber(quartersNumber, true)"
-                    :disabled="!isUserEnteredQuartersNumber"
-                />
+            <div :class="bem({
+                element: 'InputWrapper',
+                mod: { disabled: !isUserEnteredQuartersNumber }
+            })
+                ">
+                <input :class="bem({ element: 'Input' })" type="number" v-model="quartersNumber"
+                    @input="isUserInput = true" @blur="validateQuartersNumber(quartersNumber, true)"
+                    :disabled="!isUserEnteredQuartersNumber" />
                 <span :class="bem({ element: 'Label' })">
                     {{ ' ' + $t(`units.quarter`) }}
                 </span>
