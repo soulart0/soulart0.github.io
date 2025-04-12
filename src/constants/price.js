@@ -12,11 +12,11 @@ export const QUARTER_SIZE = {
     },
     [PAPER_TYPES.PAPER_STICKER]: {
         [DIMENSIONS.HEIGHT]: 44, // Write here the highest value
-        [DIMENSIONS.WIDTH]: 32
+        [DIMENSIONS.WIDTH]: 30
     },
     [PAPER_TYPES.PLASTIC_STICKER]: {
         [DIMENSIONS.HEIGHT]: 44, // Write here the highest value
-        [DIMENSIONS.WIDTH]: 32
+        [DIMENSIONS.WIDTH]: 30
     }
 }
 
