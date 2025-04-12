@@ -10,7 +10,11 @@ export const QUARTER_SIZE = {
         [DIMENSIONS.HEIGHT]: 45, // Write here the highest value
         [DIMENSIONS.WIDTH]: 30
     },
-    [PAPER_TYPES.STICKER]: {
+    [PAPER_TYPES.PAPER_STICKER]: {
+        [DIMENSIONS.HEIGHT]: 44, // Write here the highest value
+        [DIMENSIONS.WIDTH]: 32
+    },
+    [PAPER_TYPES.PLASTIC_STICKER]: {
         [DIMENSIONS.HEIGHT]: 44, // Write here the highest value
         [DIMENSIONS.WIDTH]: 32
     }
@@ -72,7 +76,7 @@ export const PRINTING_PRICE = {
                 }
             ]
         },
-        [PAPER_TYPES.STICKER]: {
+        [PAPER_TYPES.PAPER_STICKER]: {
             [PRINTING_TYPES.SINGLE_SIDED]: [
                 {
                     MIN: 1,
@@ -84,8 +88,10 @@ export const PRINTING_PRICE = {
                     MAX: Infinity,
                     PRICE: 10
                 }
-            ],
-            [PRINTING_TYPES.DOUBLE_SIDED]: [
+            ]
+        },
+        [PAPER_TYPES.PLASTIC_STICKER]: {
+            [PRINTING_TYPES.SINGLE_SIDED]: [
                 {
                     MIN: 1,
                     MAX: 100,

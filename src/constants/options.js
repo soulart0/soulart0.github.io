@@ -12,7 +12,8 @@ export const PRINTING_TYPES = {
 export const PAPER_TYPES = {
     COUCHE_350G: 'couche-350g',
     COUCHE_150_250G: 'couche-150-250g',
-    STICKER: 'sticker'
+    PAPER_STICKER: 'paper-sticker',
+    PLASTIC_STICKER: 'plastic-sticker'
 }
 
 export const CUSTOMER_SUPPLIED_PAPER_TYPES = {
@@ -63,3 +64,5 @@ export const OPTIONS = {
 export const DEFAULT_OPTIONS = Object.fromEntries(
     Object.entries(OPTIONS).map(([key, value]) => [key, value.default])
 )
+
+export const ONE_SIDED_ONLY_PAPER_TYPES = [PAPER_TYPES.PAPER_STICKER, PAPER_TYPES.PLASTIC_STICKER]

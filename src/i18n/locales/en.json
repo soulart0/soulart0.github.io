@@ -45,7 +45,8 @@
             "paper-type": {
                 "couche-350g": "Couché 350g",
                 "couche-150-250g": "Couché 150/250g",
-                "sticker": "Sticker"
+                "paper-sticker": "Paper Sticker",
+                "plastic-sticker": "Plastic Sticker"
             },
             "printing-type": {
                 "single-sided": "Single Sided",

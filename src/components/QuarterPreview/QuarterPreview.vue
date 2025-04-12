@@ -3,9 +3,7 @@ import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
 import { DIMENSIONS } from '@/constants/app'
 import { QUARTER_SIZE } from '@/constants/price'
 import { MIN_PIECE_SIZE } from '@/constants/options'
-import {
-    getOppositeDimension
-} from '@/utils/validation'
+import { getOppositeDimension } from '@/utils/validation'
 
 const props = defineProps({
     piecesPerRow: {
@@ -128,7 +126,8 @@ onBeforeUnmount(() => {
                 :class="bem({ element: 'Quarter' })"
                 :style="{
                     aspectRatio:
-                        QUARTER_SIZE[props.paperType][DIMENSIONS.WIDTH] / QUARTER_SIZE[props.paperType][DIMENSIONS.HEIGHT]
+                        QUARTER_SIZE[props.paperType][DIMENSIONS.WIDTH] /
+                        QUARTER_SIZE[props.paperType][DIMENSIONS.HEIGHT]
                 }"
             >
                 <!-- Vertical grid lines -->

@@ -10,7 +10,8 @@ import {
     PRINTING_TYPES,
     CELLOPHANE_COATED_PAPER_TYPES,
     CUSTOMER_SUPPLIED_PAPER_TYPES,
-    DEFAULT_OPTIONS
+    DEFAULT_OPTIONS,
+    ONE_SIDED_ONLY_PAPER_TYPES
 } from '@/constants/options'
 import { calculateQuartersNumber, calculatePiecesNumber, calculatePrice } from '@/utils/calculator'
 
@@ -27,19 +28,25 @@ const isUserEnteredQuartersNumber = ref(false)
 const isSyncUpdate = ref(false)
 
 const visibleOptions = computed(() => {
-    const options = []
+    const ops = []
 
     if (props.operation.ops[OPS.CUTTING]) {
-        options.push('pieceSize')
+        ops.push('pieceSize')
     }
 
-    options.push('piecesAndQuarters')
+    ops.push('piecesAndQuarters')
 
     if (props.operation.ops[OPS.PRINTING]) {
-        options.push('paperType', 'printingType', 'customerPaper', 'cellophaneCoatedPaper')
+        ops.push('paperType')
+
+        if (!ONE_SIDED_ONLY_PAPER_TYPES.includes(options.value.PAPER_TYPE)) {
+            ops.push('printingType')
+        }
+
+        ops.push('customerPaper', 'cellophaneCoatedPaper')
     }
 
-    return options
+    return ops
 })
 
 const optionNumbers = computed(() => {
@@ -55,6 +62,14 @@ watch(
     (value) => {
         if (value.key === OPERATIONS.PRINTING_ONLY.key) {
             isUserEnteredQuartersNumber.value = true
+        }
+    }
+)
+watch(
+    () => options.value.PAPER_TYPE,
+    (newPapertype) => {
+        if (ONE_SIDED_ONLY_PAPER_TYPES.includes(newPapertype)) {
+            options.value.PRINTING_TYPE = PRINTING_TYPES.SINGLE_SIDED
         }
     }
 )
@@ -83,14 +98,23 @@ watch(
         if (isSyncUpdate.value) return
 
         // safe destructuring to avoid undefined values on initial mount
-        const [prevPieces = 0, prevQuarters = 0, prevWidth = 0, prevHeight = 0, prevPaperType = DEFAULT_OPTIONS.PAPER_TYPE] = prevVals || []
+        const [
+            prevPieces = 0,
+            prevQuarters = 0,
+            prevWidth = 0,
+            prevHeight = 0,
+            prevPaperType = DEFAULT_OPTIONS.PAPER_TYPE
+        ] = prevVals || []
 
         const piecesChanged = pieces !== prevPieces
         const quartersChanged = quarters !== prevQuarters
         const pieceSizeChanged = width !== prevWidth || height !== prevHeight
         const paperTypeChanged = paperType !== prevPaperType
 
-        if ((pieceSizeChanged || paperTypeChanged || piecesChanged) && !isUserEnteredQuartersNumber.value) {
+        if (
+            (pieceSizeChanged || paperTypeChanged || piecesChanged) &&
+            !isUserEnteredQuartersNumber.value
+        ) {
             isSyncUpdate.value = true
 
             const {
@@ -108,7 +132,10 @@ watch(
             isSyncUpdate.value = false
         }
 
-        if ((pieceSizeChanged || paperTypeChanged || quartersChanged) && isUserEnteredQuartersNumber.value) {
+        if (
+            (pieceSizeChanged || paperTypeChanged || quartersChanged) &&
+            isUserEnteredQuartersNumber.value
+        ) {
             isSyncUpdate.value = true
 
             const {
@@ -152,7 +179,10 @@ watch(
             v-model="options.PAPER_TYPE"
         />
         <SelectOptionElement
-            v-if="operation.ops[OPS.PRINTING]"
+            v-if="
+                operation.ops[OPS.PRINTING] &&
+                !ONE_SIDED_ONLY_PAPER_TYPES.includes(options.PAPER_TYPE)
+            "
             :number="optionNumbers.printingType"
             :optionKey="OPTIONS.PRINTING_TYPE.key"
             :types="PRINTING_TYPES"

@@ -56,7 +56,8 @@
             "paper-type": {
                 "couche-350g": "كوشيه 350 جرام",
                 "couche-150-250g": "كوشيه 150/250 جرام",
-                "sticker": "استيكر"
+                "paper-sticker": "استيكر ورقي",
+                "plastic-sticker": "استيكر بلاستيك"
             },
             "printing-type": {
                 "single-sided": "وجه واحد",
