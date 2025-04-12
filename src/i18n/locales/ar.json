@@ -50,20 +50,27 @@
             "paper-type": "نوع الورق",
             "printing-type": "نوع الطباعة",
             "customer-supplied-paper": "هتوفر ورق الطباعة؟",
-            "cellophane-coated-paper": "الورق متغلف بسولوفان؟"
+            "cellophane-coated-paper": "نوع تغليف السولوفان"
         },
-        "paper-types": {
-            "couche-350g": "كوشيه 350 جرام",
-            "couche-150-250g": "كوشيه 150/250 جرام",
-            "sticker": "استيكر"
-        },
-        "printing-types": {
-            "single-sided": "وجه واحد",
-            "double-sided": "وجهين"
-        },
-        "boolean-options": {
-            "yes": "نعم",
-            "no": "لا"
+        "types": {
+            "paper-type": {
+                "couche-350g": "كوشيه 350 جرام",
+                "couche-150-250g": "كوشيه 150/250 جرام",
+                "sticker": "استيكر"
+            },
+            "printing-type": {
+                "single-sided": "وجه واحد",
+                "double-sided": "وجهين"
+            },
+            "cellophane-coated-paper": {
+                "single-sided": "وجه واحد",
+                "double-sided": "وجهين",
+                "none": "بدون"
+            },
+            "customer-supplied-paper": {
+                "yes": "نعم",
+                "no": "لا"
+            }
         }
     },
     "errors": {

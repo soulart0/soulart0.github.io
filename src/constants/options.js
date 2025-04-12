@@ -15,9 +15,15 @@ export const PAPER_TYPES = {
     STICKER: 'sticker'
 }
 
-export const BOOLEAN_OPTIONS = {
+export const CUSTOMER_SUPPLIED_PAPER_TYPES = {
     YES: 'yes',
     NO: 'no'
+}
+
+export const CELLOPHANE_COATED_PAPER_TYPES = {
+    SINGLE_SIDED: 'single-sided',
+    DOUBLE_SIDED: 'double-sided',
+    NONE: 'none'
 }
 
 export const OPTIONS = {
@@ -46,11 +52,11 @@ export const OPTIONS = {
     },
     CUSTOMER_SUPPLIED_PAPER: {
         key: 'customer-supplied-paper',
-        default: BOOLEAN_OPTIONS.NO
+        default: CUSTOMER_SUPPLIED_PAPER_TYPES.NO
     },
     CELLOPHANE_COATED_PAPER: {
         key: 'cellophane-coated-paper',
-        default: BOOLEAN_OPTIONS.NO
+        default: CELLOPHANE_COATED_PAPER_TYPES.NONE
     }
 }
 

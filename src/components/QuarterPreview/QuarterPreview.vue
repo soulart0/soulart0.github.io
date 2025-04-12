@@ -4,8 +4,6 @@ import { DIMENSIONS } from '@/constants/app'
 import { QUARTER_SIZE } from '@/constants/price'
 import { MIN_PIECE_SIZE } from '@/constants/options'
 import {
-    MAX_QUARTER_DIMENSION,
-    MIN_QUARTER_DIMENSION,
     getOppositeDimension
 } from '@/utils/validation'
 
@@ -21,6 +19,10 @@ const props = defineProps({
     pieceSize: {
         type: Object,
         required: true
+    },
+    paperType: {
+        type: String,
+        required: true
     }
 })
 
@@ -32,13 +34,13 @@ let observer
 const getGridLineCount = (count, dimension, opposite = false) => {
     const multiplier =
         count * props.pieceSize[opposite ? getOppositeDimension(dimension) : dimension] <
-        QUARTER_SIZE[dimension]
+        QUARTER_SIZE[props.paperType][dimension]
             ? 0
             : 1
 
     return Math.min(
         Math.max(0, count - 1 * multiplier),
-        Math.floor(QUARTER_SIZE[MAX_QUARTER_DIMENSION] / MIN_PIECE_SIZE)
+        Math.floor(QUARTER_SIZE[props.paperType][DIMENSIONS.HEIGHT] / MIN_PIECE_SIZE)
     )
 }
 
@@ -46,7 +48,7 @@ const calculateLinePosition = (base, index, dimension, opposite = false) => {
     return (
         (index / base) *
         ((base * props.pieceSize[opposite ? getOppositeDimension(dimension) : dimension]) /
-            QUARTER_SIZE[dimension]) *
+            QUARTER_SIZE[props.paperType][dimension]) *
         100
     )
 }
@@ -64,9 +66,9 @@ const getLines = (pieces, dimension, key) => {
 const isOpposite = computed(() => {
     if (
         props.piecesPerRow * props.pieceSize[DIMENSIONS.HEIGHT] ===
-            QUARTER_SIZE[DIMENSIONS.WIDTH] &&
+            QUARTER_SIZE[props.paperType][DIMENSIONS.WIDTH] &&
         props.piecesPerColumn * props.pieceSize[DIMENSIONS.WIDTH] ===
-            QUARTER_SIZE[DIMENSIONS.HEIGHT]
+            QUARTER_SIZE[props.paperType][DIMENSIONS.HEIGHT]
     ) {
         return true
     }
@@ -126,7 +128,7 @@ onBeforeUnmount(() => {
                 :class="bem({ element: 'Quarter' })"
                 :style="{
                     aspectRatio:
-                        QUARTER_SIZE[MIN_QUARTER_DIMENSION] / QUARTER_SIZE[MAX_QUARTER_DIMENSION]
+                        QUARTER_SIZE[props.paperType][DIMENSIONS.WIDTH] / QUARTER_SIZE[props.paperType][DIMENSIONS.HEIGHT]
                 }"
             >
                 <!-- Vertical grid lines -->
@@ -166,7 +168,7 @@ onBeforeUnmount(() => {
                 <div :class="bem({ element: 'DimensionLine' })">
                     <div :class="bem({ element: 'Arrow', mod: { top: true } })"></div>
                     <span :class="bem({ element: 'Text' })">
-                        {{ QUARTER_SIZE[DIMENSIONS.HEIGHT] }} {{ $t('units.cm') }}
+                        {{ QUARTER_SIZE[props.paperType][DIMENSIONS.HEIGHT] }} {{ $t('units.cm') }}
                     </span>
                     <div :class="bem({ element: 'Arrow', mod: { bottom: true } })"></div>
                 </div>
@@ -181,7 +183,7 @@ onBeforeUnmount(() => {
             <div :class="bem({ element: 'DimensionLine' })">
                 <div :class="bem({ element: 'Arrow', mod: { left: true } })"></div>
                 <span :class="bem({ element: 'Text' })">
-                    {{ QUARTER_SIZE[DIMENSIONS.WIDTH] }} {{ $t('units.cm') }}
+                    {{ QUARTER_SIZE[props.paperType][DIMENSIONS.WIDTH] }} {{ $t('units.cm') }}
                 </span>
                 <div :class="bem({ element: 'Arrow', mod: { right: true } })"></div>
             </div>

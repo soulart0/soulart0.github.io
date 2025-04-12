@@ -1,11 +1,15 @@
 import { DIMENSIONS } from '@/constants/app'
 import { OPS } from '@/constants/operations'
-import { BOOLEAN_OPTIONS, PRINTING_TYPES } from '@/constants/options'
+import {
+    CUSTOMER_SUPPLIED_PAPER_TYPES,
+    PRINTING_TYPES,
+    CELLOPHANE_COATED_PAPER_TYPES
+} from '@/constants/options'
 import { QUARTER_SIZE, PRINTING_PRICE, CUTTING_PRICE } from '@/constants/price'
 
-const getOrientationDetails = (pieceSize) => {
+const getOrientationDetails = (pieceSize, paperType) => {
     const { WIDTH, HEIGHT } = DIMENSIONS
-    const { [WIDTH]: qWidth, [HEIGHT]: qHeight } = QUARTER_SIZE
+    const { [WIDTH]: qWidth, [HEIGHT]: qHeight } = QUARTER_SIZE[paperType]
     const { [WIDTH]: pWidth, [HEIGHT]: pHeight } = pieceSize
 
     const calculateOrientation = (pieceW, pieceH) => {
@@ -29,8 +33,11 @@ const getOrientationDetails = (pieceSize) => {
     return rotated
 }
 
-export const calculateQuartersNumber = (pieceSize, piecesNumber) => {
-    const { maxPiecesPerQuarter, piecesPerRow, piecesPerColumn } = getOrientationDetails(pieceSize)
+export const calculateQuartersNumber = (pieceSize, piecesNumber, paperType) => {
+    const { maxPiecesPerQuarter, piecesPerRow, piecesPerColumn } = getOrientationDetails(
+        pieceSize,
+        paperType
+    )
 
     return {
         quartersNumber: Math.ceil(piecesNumber / maxPiecesPerQuarter),
@@ -40,8 +47,11 @@ export const calculateQuartersNumber = (pieceSize, piecesNumber) => {
     }
 }
 
-export const calculatePiecesNumber = (pieceSize, quartersNumber) => {
-    const { maxPiecesPerQuarter, piecesPerRow, piecesPerColumn } = getOrientationDetails(pieceSize)
+export const calculatePiecesNumber = (pieceSize, quartersNumber, paperType) => {
+    const { maxPiecesPerQuarter, piecesPerRow, piecesPerColumn } = getOrientationDetails(
+        pieceSize,
+        paperType
+    )
 
     return {
         piecesNumber: maxPiecesPerQuarter * quartersNumber,
@@ -51,22 +61,25 @@ export const calculatePiecesNumber = (pieceSize, quartersNumber) => {
     }
 }
 
-const calculatePrintingPrice = (options) => {
-    const {
-        PAPER_TYPE,
-        PRINTING_TYPE,
-        CUSTOMER_SUPPLIED_PAPER,
-        CELLOPHANE_COATED_PAPER,
-        QUARTERS_NUMBER
-    } = options
+const calculateCellophanePrice = (options) => {
+    const { CELLOPHANE_COATED_PAPER } = options
 
-    let price = 0
-
-    if (CELLOPHANE_COATED_PAPER === BOOLEAN_OPTIONS.YES) {
-        price += PRINTING_PRICE.CELLOPHANE_COATED_PAPER
+    switch (CELLOPHANE_COATED_PAPER) {
+        case CELLOPHANE_COATED_PAPER_TYPES.SINGLE_SIDED:
+            return PRINTING_PRICE.CELLOPHANE_COATED_PAPER
+        case CELLOPHANE_COATED_PAPER_TYPES.DOUBLE_SIDED:
+            return PRINTING_PRICE.CELLOPHANE_COATED_PAPER * 2
+        default:
+            return 0
     }
+}
 
-    if (CUSTOMER_SUPPLIED_PAPER === BOOLEAN_OPTIONS.YES) {
+const calculatePrintingPrice = (options) => {
+    const { PAPER_TYPE, PRINTING_TYPE, CUSTOMER_SUPPLIED_PAPER, QUARTERS_NUMBER } = options
+
+    let price = calculateCellophanePrice(options)
+
+    if (CUSTOMER_SUPPLIED_PAPER === CUSTOMER_SUPPLIED_PAPER_TYPES.YES) {
         return (
             price +
             PRINTING_PRICE.CUSTOMER_SUPPLIED_PAPER *

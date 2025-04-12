@@ -39,20 +39,27 @@
             "paper-type": "Paper Type",
             "printing-type": "Printing Type",
             "customer-supplied-paper": "Will you provide the printing paper?",
-            "cellophane-coated-paper": "Coat the paper with cellophane?"
+            "cellophane-coated-paper": "Cellophane Coating Type"
         },
-        "paper-types": {
-            "couche-350g": "Couché 350g",
-            "couche-150-250g": "Couché 150/250g",
-            "sticker": "Sticker"
-        },
-        "printing-types": {
-            "single-sided": "Single Sided",
-            "double-sided": "Double Sided"
-        },
-        "boolean-options": {
-            "yes": "Yes",
-            "no": "No"
+        "types": {
+            "paper-type": {
+                "couche-350g": "Couché 350g",
+                "couche-150-250g": "Couché 150/250g",
+                "sticker": "Sticker"
+            },
+            "printing-type": {
+                "single-sided": "Single Sided",
+                "double-sided": "Double Sided"
+            },
+            "cellophane-coated-paper": {
+                "single-sided": "Single Sided",
+                "double-sided": "Double Sided",
+                "none": "None"
+            },
+            "customer-supplied-paper": {
+                "yes": "Yes",
+                "no": "No"
+            }
         }
     },
     "errors": {

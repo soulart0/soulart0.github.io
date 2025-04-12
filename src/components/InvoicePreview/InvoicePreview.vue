@@ -1,6 +1,7 @@
 <script setup>
 import { DIMENSIONS } from '@/constants/app'
 import { OPS } from '@/constants/operations'
+import { OPTIONS } from '@/constants/options'
 import { QUARTER_SIZE } from '@/constants/price'
 
 defineProps({
@@ -31,46 +32,48 @@ defineProps({
                     <td>{{ $t('invoice.order-type') }}</td>
                     <td>{{ $t(`calculator.operations.${operation.key}`) }}</td>
                 </tr>
-                <tr v-if="operation.ops[OPS.CUTTING]">
-                    <td>{{ $t('calculator.options.piece-size') }}</td>
-                    <td>
-                        {{ options.PIECE_SIZE[DIMENSIONS.WIDTH] }}x{{
-                            options.PIECE_SIZE[DIMENSIONS.HEIGHT]
-                        }}
-                        {{ $t('units.cm') }}
-                    </td>
-                </tr>
-                <tr v-if="operation.ops[OPS.CUTTING]">
-                    <td>{{ $t('calculator.options.pieces-number') }}</td>
-                    <td>
-                        {{ results.maxPiecesPerQuarter * options.QUARTERS_NUMBER }}
-                        {{ $t('units.piece') }}
-                    </td>
-                </tr>
+                <template v-if="operation.ops[OPS.CUTTING]">
+                    <tr>
+                        <td>{{ $t('calculator.options.piece-size') }}</td>
+                        <td>
+                            {{ options.PIECE_SIZE[DIMENSIONS.WIDTH] }}x{{
+                                options.PIECE_SIZE[DIMENSIONS.HEIGHT]
+                            }}
+                            {{ $t('units.cm') }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ $t('calculator.options.pieces-number') }}</td>
+                        <td>
+                            {{ results.maxPiecesPerQuarter * options.QUARTERS_NUMBER }}
+                            {{ $t('units.piece') }}
+                        </td>
+                    </tr>
+                </template>
                 <tr>
                     <td>{{ $t('calculator.options.quarters-number') }}</td>
                     <td>{{ options.QUARTERS_NUMBER }} {{ $t('units.quarter') }}</td>
                 </tr>
-                <tr v-if="operation.ops[OPS.PRINTING]">
-                    <td>{{ $t('calculator.options.paper-type') }}</td>
-                    <td>{{ $t(`calculator.paper-types.${options.PAPER_TYPE}`) }}</td>
-                </tr>
-                <tr v-if="operation.ops[OPS.PRINTING]">
-                    <td>{{ $t('calculator.options.printing-type') }}</td>
-                    <td>{{ $t(`calculator.printing-types.${options.PRINTING_TYPE}`) }}</td>
-                </tr>
-                <tr v-if="operation.ops[OPS.PRINTING]">
-                    <td>{{ $t('invoice.customer-supplied-paper') }}</td>
-                    <td>
-                        {{ $t(`calculator.boolean-options.${options.CUSTOMER_SUPPLIED_PAPER}`) }}
-                    </td>
-                </tr>
-                <tr v-if="operation.ops[OPS.PRINTING]">
-                    <td>{{ $t('invoice.cellophane-coated-paper') }}</td>
-                    <td>
-                        {{ $t(`calculator.boolean-options.${options.CELLOPHANE_COATED_PAPER}`) }}
-                    </td>
-                </tr>
+                <template v-if="operation.ops[OPS.PRINTING]">
+                    <tr v-for="(option, index) in ['PAPER_TYPE', 'PRINTING_TYPE']" :key="index">
+                        <td>{{ $t(`calculator.options.${OPTIONS[option].key}`) }}</td>
+                        <td>
+                            {{ $t(`calculator.types.${OPTIONS[option].key}.${options[option]}`) }}
+                        </td>
+                    </tr>
+                    <tr
+                        v-for="(option, index) in [
+                            'CUSTOMER_SUPPLIED_PAPER',
+                            'CELLOPHANE_COATED_PAPER'
+                        ]"
+                        :key="index"
+                    >
+                        <td>{{ $t(`invoice.${OPTIONS[option].key}`) }}</td>
+                        <td>
+                            {{ $t(`calculator.types.${OPTIONS[option].key}.${options[option]}`) }}
+                        </td>
+                    </tr>
+                </template>
                 <tr>
                     <td colspan="N"><br /></td>
                 </tr>
@@ -81,11 +84,11 @@ defineProps({
                             results.piecesPerRow
                         }}
                         {{ $t('units.piece') }} {{ $t('general.in-the-side') }} &lt;{{
-                            QUARTER_SIZE[DIMENSIONS.WIDTH]
+                            QUARTER_SIZE[options.PAPER_TYPE][DIMENSIONS.WIDTH]
                         }}{{ $t('units.cm') }}&gt; {{ $t('general.and') }}
                         {{ results.piecesPerColumn }}
                         {{ $t('units.piece') }} {{ $t('general.in-the-side') }} &lt;{{
-                            QUARTER_SIZE[DIMENSIONS.HEIGHT]
+                            QUARTER_SIZE[options.PAPER_TYPE][DIMENSIONS.HEIGHT]
                         }}{{ $t('units.cm') }}&gt;)
                     </td>
                 </tr>

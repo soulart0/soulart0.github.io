@@ -3,16 +3,6 @@ import { DIMENSIONS } from '@/constants/app'
 import { MIN_PIECE_SIZE } from '@/constants/options'
 import { QUARTER_SIZE } from '@/constants/price'
 
-const getMaxDimension = (size) => {
-    const { width, height } = size
-
-    if (width > height) {
-        return DIMENSIONS.WIDTH
-    }
-
-    return DIMENSIONS.HEIGHT
-}
-
 export const getOppositeDimension = (dimension) => {
     if (dimension === DIMENSIONS.WIDTH) {
         return DIMENSIONS.HEIGHT
@@ -21,17 +11,14 @@ export const getOppositeDimension = (dimension) => {
     return DIMENSIONS.WIDTH
 }
 
-export const MAX_QUARTER_DIMENSION = getMaxDimension(QUARTER_SIZE)
-export const MIN_QUARTER_DIMENSION = getOppositeDimension(MAX_QUARTER_DIMENSION)
-
 const getDimensionToCompareWith = (size, dimension) => {
     const oppositeDimension = getOppositeDimension(dimension)
 
-    if (size[oppositeDimension] > QUARTER_SIZE[MIN_QUARTER_DIMENSION]) {
-        return MIN_QUARTER_DIMENSION
+    if (size[oppositeDimension] > QUARTER_SIZE[DIMENSIONS.WIDTH]) {
+        return DIMENSIONS.WIDTH
     }
 
-    return MAX_QUARTER_DIMENSION
+    return DIMENSIONS.HEIGHT
 }
 
 export const validatePieceSize = (pieceSize, dimension, newValue, validateMin = false) => {

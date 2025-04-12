@@ -2,8 +2,18 @@ import { DIMENSIONS } from '@/constants/app'
 import { PAPER_TYPES, PRINTING_TYPES } from '@/constants/options'
 
 export const QUARTER_SIZE = {
-    [DIMENSIONS.HEIGHT]: 48, // Write here the highest value
-    [DIMENSIONS.WIDTH]: 33
+    [PAPER_TYPES.COUCHE_350G]: {
+        [DIMENSIONS.HEIGHT]: 45, // Write here the highest value
+        [DIMENSIONS.WIDTH]: 30
+    },
+    [PAPER_TYPES.COUCHE_150_250G]: {
+        [DIMENSIONS.HEIGHT]: 45, // Write here the highest value
+        [DIMENSIONS.WIDTH]: 30
+    },
+    [PAPER_TYPES.STICKER]: {
+        [DIMENSIONS.HEIGHT]: 44, // Write here the highest value
+        [DIMENSIONS.WIDTH]: 32
+    }
 }
 
 export const PRINTING_PRICE = {

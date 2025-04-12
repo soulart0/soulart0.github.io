@@ -2,11 +2,16 @@
 import { defineModel, ref, watch, computed } from 'vue'
 import PieceSizeOptionElement from 'components/PieceSizeOptionElement/PieceSizeOptionElement.vue'
 import PiecesAndQuartersNumberOptionElement from 'components/PiecesAndQuartersNumberOptionElement/PiecesAndQuartersNumberOptionElement.vue'
-import PaperTypeOptionElement from 'components/PaperTypeOptionElement/PaperTypeOptionElement.vue'
-import PrintingTypeOptionElement from 'components/PrintingTypeOptionElement/PrintingTypeOptionElement.vue'
-import BooleanOptionElement from 'components/BooleanOptionElement/BooleanOptionElement.vue'
+import SelectOptionElement from 'components/SelectOptionElement/SelectOptionElement.vue'
 import { OPERATIONS, OPS } from '@/constants/operations'
-import { OPTIONS } from '@/constants/options'
+import {
+    OPTIONS,
+    PAPER_TYPES,
+    PRINTING_TYPES,
+    CELLOPHANE_COATED_PAPER_TYPES,
+    CUSTOMER_SUPPLIED_PAPER_TYPES,
+    DEFAULT_OPTIONS
+} from '@/constants/options'
 import { calculateQuartersNumber, calculatePiecesNumber, calculatePrice } from '@/utils/calculator'
 
 const props = defineProps({
@@ -71,19 +76,21 @@ watch(
         options.value.PIECES_NUMBER,
         options.value.QUARTERS_NUMBER,
         options.value.PIECE_SIZE.width,
-        options.value.PIECE_SIZE.height
+        options.value.PIECE_SIZE.height,
+        options.value.PAPER_TYPE
     ],
-    ([pieces, quarters, width, height], prevVals) => {
+    ([pieces, quarters, width, height, paperType], prevVals) => {
         if (isSyncUpdate.value) return
 
         // safe destructuring to avoid undefined values on initial mount
-        const [prevPieces = 0, prevQuarters = 0, prevWidth = 0, prevHeight = 0] = prevVals || []
+        const [prevPieces = 0, prevQuarters = 0, prevWidth = 0, prevHeight = 0, prevPaperType = DEFAULT_OPTIONS.PAPER_TYPE] = prevVals || []
 
         const piecesChanged = pieces !== prevPieces
         const quartersChanged = quarters !== prevQuarters
         const pieceSizeChanged = width !== prevWidth || height !== prevHeight
+        const paperTypeChanged = paperType !== prevPaperType
 
-        if ((pieceSizeChanged || piecesChanged) && !isUserEnteredQuartersNumber.value) {
+        if ((pieceSizeChanged || paperTypeChanged || piecesChanged) && !isUserEnteredQuartersNumber.value) {
             isSyncUpdate.value = true
 
             const {
@@ -91,7 +98,7 @@ watch(
                 maxPiecesPerQuarter: maxPieces,
                 piecesPerRow: pPerRow,
                 piecesPerColumn: pPerColumn
-            } = calculateQuartersNumber({ width, height }, pieces)
+            } = calculateQuartersNumber({ width, height }, pieces, paperType)
 
             options.value.QUARTERS_NUMBER = quartersNumber
             results.value.maxPiecesPerQuarter = maxPieces
@@ -101,7 +108,7 @@ watch(
             isSyncUpdate.value = false
         }
 
-        if ((pieceSizeChanged || quartersChanged) && isUserEnteredQuartersNumber.value) {
+        if ((pieceSizeChanged || paperTypeChanged || quartersChanged) && isUserEnteredQuartersNumber.value) {
             isSyncUpdate.value = true
 
             const {
@@ -109,7 +116,7 @@ watch(
                 maxPiecesPerQuarter: maxPieces,
                 piecesPerRow: pPerRow,
                 piecesPerColumn: pPerColumn
-            } = calculatePiecesNumber({ width, height }, quarters)
+            } = calculatePiecesNumber({ width, height }, quarters, paperType)
 
             options.value.PIECES_NUMBER = piecesNumber
             results.value.maxPiecesPerQuarter = maxPieces
@@ -137,26 +144,32 @@ watch(
             v-model:quartersNumber="options.QUARTERS_NUMBER"
             v-model:isUserEnteredQuartersNumber="isUserEnteredQuartersNumber"
         />
-        <PaperTypeOptionElement
+        <SelectOptionElement
             v-if="operation.ops[OPS.PRINTING]"
             :number="optionNumbers.paperType"
+            :optionKey="OPTIONS.PAPER_TYPE.key"
+            :types="PAPER_TYPES"
             v-model="options.PAPER_TYPE"
         />
-        <PrintingTypeOptionElement
+        <SelectOptionElement
             v-if="operation.ops[OPS.PRINTING]"
             :number="optionNumbers.printingType"
+            :optionKey="OPTIONS.PRINTING_TYPE.key"
+            :types="PRINTING_TYPES"
             v-model="options.PRINTING_TYPE"
         />
-        <BooleanOptionElement
+        <SelectOptionElement
             v-if="operation.ops[OPS.PRINTING]"
             :number="optionNumbers.customerPaper"
             :optionKey="OPTIONS.CUSTOMER_SUPPLIED_PAPER.key"
+            :types="CUSTOMER_SUPPLIED_PAPER_TYPES"
             v-model="options.CUSTOMER_SUPPLIED_PAPER"
         />
-        <BooleanOptionElement
+        <SelectOptionElement
             v-if="operation.ops[OPS.PRINTING]"
             :number="optionNumbers.cellophaneCoatedPaper"
             :optionKey="OPTIONS.CELLOPHANE_COATED_PAPER.key"
+            :types="CELLOPHANE_COATED_PAPER_TYPES"
             v-model="options.CELLOPHANE_COATED_PAPER"
         />
     </div>

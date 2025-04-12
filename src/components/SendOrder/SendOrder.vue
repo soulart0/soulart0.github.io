@@ -31,7 +31,6 @@ const props = defineProps({
 })
 
 const sendOrderViaWhatsApp = () => {
-    console.log(i18n.global)
     // Construct message body
     let message = `*${i18n.global.t('invoice.title')}*\n\n`
 
@@ -78,11 +77,11 @@ const sendOrderViaWhatsApp = () => {
         } ${i18n.global.t('units.piece')}\n  - ${props.results.piecesPerRow} ${i18n.global.t(
             'units.piece'
         )} ${i18n.global.t('general.in-the-side')} <${
-            QUARTER_SIZE[DIMENSIONS.WIDTH]
+            QUARTER_SIZE[props.options.PAPER_TYPE][DIMENSIONS.WIDTH]
         }${i18n.global.t('units.cm')}>\n  - ${props.results.piecesPerColumn} ${i18n.global.t(
             'units.piece'
         )} ${i18n.global.t('general.in-the-side')} <${
-            QUARTER_SIZE[DIMENSIONS.HEIGHT]
+            QUARTER_SIZE[props.options.PAPER_TYPE][DIMENSIONS.HEIGHT]
         }${i18n.global.t('units.cm')}>\n`
     }
 
