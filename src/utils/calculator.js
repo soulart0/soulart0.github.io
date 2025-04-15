@@ -5,16 +5,22 @@ import {
     PRINTING_TYPES,
     CELLOPHANE_COATED_PAPER_TYPES
 } from '@/constants/options'
-import { QUARTER_SIZE, PRINTING_PRICE, CUTTING_PRICE } from '@/constants/price'
+import { QUARTER_SIZE, PRINTING_PRICE, CUTTING_PRICE, PIECE_MARGIN } from '@/constants/price'
 
-const getOrientationDetails = (pieceSize, paperType) => {
+const getOrientationDetails = (pieceSize, paperType, operations) => {
     const { WIDTH, HEIGHT } = DIMENSIONS
     const { [WIDTH]: qWidth, [HEIGHT]: qHeight } = QUARTER_SIZE[paperType]
     const { [WIDTH]: pWidth, [HEIGHT]: pHeight } = pieceSize
 
+    const margin = operations[OPS.CUTTING] ? PIECE_MARGIN : 0
+
     const calculateOrientation = (pieceW, pieceH) => {
-        const piecesPerRow = Math.floor(qWidth / pieceW)
-        const piecesPerColumn = Math.floor(qHeight / pieceH)
+        const calculateNumberOfPieces = (totalSize, pieceSize) => {
+            return Math.floor((totalSize + margin) / (pieceSize + margin))
+        }
+
+        const piecesPerRow = calculateNumberOfPieces(qWidth, pieceW)
+        const piecesPerColumn = calculateNumberOfPieces(qHeight, pieceH)
 
         return {
             piecesPerRow,
@@ -33,10 +39,11 @@ const getOrientationDetails = (pieceSize, paperType) => {
     return rotated
 }
 
-export const calculateQuartersNumber = (pieceSize, piecesNumber, paperType) => {
+export const calculateQuartersNumber = (pieceSize, piecesNumber, paperType, operations) => {
     const { maxPiecesPerQuarter, piecesPerRow, piecesPerColumn } = getOrientationDetails(
         pieceSize,
-        paperType
+        paperType,
+        operations
     )
 
     return {
@@ -47,10 +54,11 @@ export const calculateQuartersNumber = (pieceSize, piecesNumber, paperType) => {
     }
 }
 
-export const calculatePiecesNumber = (pieceSize, quartersNumber, paperType) => {
+export const calculatePiecesNumber = (pieceSize, quartersNumber, paperType, operations) => {
     const { maxPiecesPerQuarter, piecesPerRow, piecesPerColumn } = getOrientationDetails(
         pieceSize,
-        paperType
+        paperType,
+        operations
     )
 
     return {

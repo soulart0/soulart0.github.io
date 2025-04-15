@@ -1,14 +1,16 @@
 import { DIMENSIONS } from '@/constants/app'
 import { PAPER_TYPES, PRINTING_TYPES } from '@/constants/options'
 
+export const PIECE_MARGIN = 0.2
+
 export const QUARTER_SIZE = {
     [PAPER_TYPES.COUCHE_350G]: {
-        [DIMENSIONS.HEIGHT]: 45, // Write here the highest value
-        [DIMENSIONS.WIDTH]: 30
+        [DIMENSIONS.HEIGHT]: 46, // Write here the highest value
+        [DIMENSIONS.WIDTH]: 31
     },
     [PAPER_TYPES.COUCHE_150_250G]: {
-        [DIMENSIONS.HEIGHT]: 45, // Write here the highest value
-        [DIMENSIONS.WIDTH]: 30
+        [DIMENSIONS.HEIGHT]: 46, // Write here the highest value
+        [DIMENSIONS.WIDTH]: 31
     },
     [PAPER_TYPES.PAPER_STICKER]: {
         [DIMENSIONS.HEIGHT]: 44, // Write here the highest value

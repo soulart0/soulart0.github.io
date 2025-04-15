@@ -110,7 +110,7 @@ watch(
                 maxPiecesPerQuarter: maxPieces,
                 piecesPerRow: pPerRow,
                 piecesPerColumn: pPerColumn
-            } = calculateQuartersNumber({ width, height }, pieces, paperType)
+            } = calculateQuartersNumber({ width, height }, pieces, paperType, props.operation.ops)
 
             options.value.QUARTERS_NUMBER = quartersNumber
             results.value.maxPiecesPerQuarter = maxPieces
@@ -131,7 +131,7 @@ watch(
                 maxPiecesPerQuarter: maxPieces,
                 piecesPerRow: pPerRow,
                 piecesPerColumn: pPerColumn
-            } = calculatePiecesNumber({ width, height }, quarters, paperType)
+            } = calculatePiecesNumber({ width, height }, quarters, paperType, props.operation.ops)
 
             options.value.PIECES_NUMBER = piecesNumber
             results.value.maxPiecesPerQuarter = maxPieces
