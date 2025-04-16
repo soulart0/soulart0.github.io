@@ -39,17 +39,13 @@ const sendOrderViaWhatsApp = () => {
         `calculator.operations.${props.operation.key}`
     )}\n`
 
-    // Cutting-related details
-    if (props.operation.ops[OPS.CUTTING]) {
-        message += `• ${i18n.global.t('calculator.options.piece-size')}: ${
-            props.options.PIECE_SIZE[DIMENSIONS.WIDTH]
-        }x${props.options.PIECE_SIZE[DIMENSIONS.HEIGHT]}${i18n.global.t('units.cm')}\n`
-        message += `• ${i18n.global.t('calculator.options.pieces-number')}: ${
-            props.results.maxPiecesPerQuarter * props.options.QUARTERS_NUMBER
-        } ${i18n.global.t('units.piece')}\n`
-    }
-
     // Common details
+    message += `• ${i18n.global.t('calculator.options.piece-size')}: ${
+        props.options.PIECE_SIZE[DIMENSIONS.WIDTH]
+    }x${props.options.PIECE_SIZE[DIMENSIONS.HEIGHT]}${i18n.global.t('units.cm')}\n`
+    message += `• ${i18n.global.t('calculator.options.pieces-number')}: ${
+        props.results.maxPiecesPerQuarter * props.options.QUARTERS_NUMBER
+    } ${i18n.global.t('units.piece')}\n`
     message += `• ${i18n.global.t('calculator.options.quarters-number')}: ${
         props.options.QUARTERS_NUMBER
     } ${i18n.global.t('units.quarter')}\n`
@@ -70,20 +66,17 @@ const sendOrderViaWhatsApp = () => {
         )}\n`
     }
 
-    // Price breakdown
-    if (props.operation.ops[OPS.CUTTING]) {
-        message += `\n• ${i18n.global.t('invoice.pieces-per-quarter')}:\n  - ${
-            props.results.maxPiecesPerQuarter
-        } ${i18n.global.t('units.piece')}\n  - ${props.results.piecesPerRow} ${i18n.global.t(
-            'units.piece'
-        )} ${i18n.global.t('general.in-the-side')} <${
-            QUARTER_SIZE[props.options.PAPER_TYPE][DIMENSIONS.WIDTH]
-        }${i18n.global.t('units.cm')}>\n  - ${props.results.piecesPerColumn} ${i18n.global.t(
-            'units.piece'
-        )} ${i18n.global.t('general.in-the-side')} <${
-            QUARTER_SIZE[props.options.PAPER_TYPE][DIMENSIONS.HEIGHT]
-        }${i18n.global.t('units.cm')}>\n`
-    }
+    message += `\n• ${i18n.global.t('invoice.pieces-per-quarter')}:\n  - ${
+        props.results.maxPiecesPerQuarter
+    } ${i18n.global.t('units.piece')}\n  - ${props.results.piecesPerRow} ${i18n.global.t(
+        'units.piece'
+    )} ${i18n.global.t('general.in-the-side')} <${
+        QUARTER_SIZE[props.options.PAPER_TYPE][DIMENSIONS.WIDTH]
+    }${i18n.global.t('units.cm')}>\n  - ${props.results.piecesPerColumn} ${i18n.global.t(
+        'units.piece'
+    )} ${i18n.global.t('general.in-the-side')} <${
+        QUARTER_SIZE[props.options.PAPER_TYPE][DIMENSIONS.HEIGHT]
+    }${i18n.global.t('units.cm')}>\n`
 
     // Pricing details
     message += `\n*${i18n.global.t('invoice.price.details')}*\n`

@@ -32,24 +32,22 @@ defineProps({
                     <td>{{ $t('invoice.order-type') }}</td>
                     <td>{{ $t(`calculator.operations.${operation.key}`) }}</td>
                 </tr>
-                <template v-if="operation.ops[OPS.CUTTING]">
-                    <tr>
-                        <td>{{ $t('calculator.options.piece-size') }}</td>
-                        <td>
-                            {{ options.PIECE_SIZE[DIMENSIONS.WIDTH] }}x{{
-                                options.PIECE_SIZE[DIMENSIONS.HEIGHT]
-                            }}
-                            {{ $t('units.cm') }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>{{ $t('calculator.options.pieces-number') }}</td>
-                        <td>
-                            {{ results.maxPiecesPerQuarter * options.QUARTERS_NUMBER }}
-                            {{ $t('units.piece') }}
-                        </td>
-                    </tr>
-                </template>
+                <tr>
+                    <td>{{ $t('calculator.options.piece-size') }}</td>
+                    <td>
+                        {{ options.PIECE_SIZE[DIMENSIONS.WIDTH] }}x{{
+                            options.PIECE_SIZE[DIMENSIONS.HEIGHT]
+                        }}
+                        {{ $t('units.cm') }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ $t('calculator.options.pieces-number') }}</td>
+                    <td>
+                        {{ results.maxPiecesPerQuarter * options.QUARTERS_NUMBER }}
+                        {{ $t('units.piece') }}
+                    </td>
+                </tr>
                 <tr>
                     <td>{{ $t('calculator.options.quarters-number') }}</td>
                     <td>{{ options.QUARTERS_NUMBER }} {{ $t('units.quarter') }}</td>
@@ -77,7 +75,7 @@ defineProps({
                 <tr>
                     <td colspan="N"><br /></td>
                 </tr>
-                <tr v-if="operation.ops[OPS.CUTTING]">
+                <tr>
                     <td>{{ $t('invoice.pieces-per-quarter') }}</td>
                     <td>
                         {{ results.maxPiecesPerQuarter }} {{ $t('units.piece') }} ({{
