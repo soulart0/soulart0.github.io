@@ -4,6 +4,8 @@ import { DIMENSIONS } from '@/constants/app'
 import { QUARTER_SIZE } from '@/constants/price'
 import { MIN_PIECE_SIZE } from '@/constants/options'
 import { getOppositeDimension } from '@/utils/validation'
+import { OPS } from '@/constants/operations'
+import { PIECE_MARGIN } from '@/constants/price'
 
 const props = defineProps({
     piecesPerRow: {
@@ -21,6 +23,10 @@ const props = defineProps({
     paperType: {
         type: String,
         required: true
+    },
+    operations: {
+        type: Object,
+        required: true
     }
 })
 
@@ -31,8 +37,14 @@ let observer
 
 const getGridLineCount = (count, dimension, opposite = false) => {
     const multiplier =
-        count * props.pieceSize[opposite ? getOppositeDimension(dimension) : dimension] <
-        QUARTER_SIZE[props.paperType][dimension]
+        Number(
+            (
+                count *
+                    (props.pieceSize[opposite ? getOppositeDimension(dimension) : dimension] +
+                        margin.value) -
+                margin.value
+            ).toFixed(1)
+        ) < QUARTER_SIZE[props.paperType][dimension]
             ? 0
             : 1
 
@@ -42,50 +54,64 @@ const getGridLineCount = (count, dimension, opposite = false) => {
     )
 }
 
-const calculateLinePosition = (base, index, dimension, opposite = false) => {
+const calculateLinePosition = (index, dimension, opposite = false) => {
     return (
-        (index / base) *
-        ((base * props.pieceSize[opposite ? getOppositeDimension(dimension) : dimension]) /
-            QUARTER_SIZE[props.paperType][dimension]) *
-        100
+        (100 *
+            (index * props.pieceSize[opposite ? getOppositeDimension(dimension) : dimension] +
+                (index - 1) * margin.value)) /
+        QUARTER_SIZE[props.paperType][dimension]
+    )
+}
+
+const calculateMarginLinePosition = (index, dimension, opposite = false) => {
+    return (
+        (100 *
+            index *
+            (props.pieceSize[opposite ? getOppositeDimension(dimension) : dimension] +
+                margin.value)) /
+        QUARTER_SIZE[props.paperType][dimension]
     )
 }
 
 const getLines = (pieces, dimension, key) => {
     const count = getGridLineCount(pieces, dimension, isOpposite.value)
 
-    return Array.from({ length: count }, (_, i) => ({
-        key: `${key}-${i + 1}`,
-        position: calculateLinePosition(pieces, i + 1, dimension, isOpposite.value),
-        isLast: i + 1 === count && pieces === count
-    }))
+    return Array.from({ length: count }, (_, i) => {
+        const line = {
+            key: `${key}-${i * 2 + 1}`,
+            position: calculateLinePosition(i + 1, dimension, isOpposite.value),
+            isLast: i + 1 === count && pieces === count
+        }
+
+        return props.operations[OPS.CUTTING] && i + 1 <= count && !line.isLast
+            ? [
+                  line,
+                  {
+                      key: `${key}-${i * 2 + 2}`,
+                      position: calculateMarginLinePosition(i + 1, dimension, isOpposite.value),
+                      isLast: false
+                  }
+              ]
+            : line
+    }).flat()
 }
 
+const margin = computed(() => {
+    return props.operations[OPS.CUTTING] ? PIECE_MARGIN : 0
+})
+
 const isOpposite = computed(() => {
-    if (
-        props.piecesPerRow * props.pieceSize[DIMENSIONS.HEIGHT] ===
-            QUARTER_SIZE[props.paperType][DIMENSIONS.WIDTH] &&
-        props.piecesPerColumn * props.pieceSize[DIMENSIONS.WIDTH] ===
-            QUARTER_SIZE[props.paperType][DIMENSIONS.HEIGHT]
-    ) {
-        return true
+    const checkMaxSize = (pieces, pieceSize, dimension) => {
+        return (
+            Number((pieces * (pieceSize[dimension] + margin.value) - margin.value).toFixed(1)) >
+            QUARTER_SIZE[props.paperType][dimension]
+        )
     }
 
-    const verticalOverflow =
-        calculateLinePosition(
-            props.piecesPerRow,
-            getGridLineCount(props.piecesPerRow, DIMENSIONS.WIDTH),
-            DIMENSIONS.WIDTH
-        ) > 100
-
-    const horizontalOverflow =
-        calculateLinePosition(
-            props.piecesPerColumn,
-            getGridLineCount(props.piecesPerColumn, DIMENSIONS.HEIGHT),
-            DIMENSIONS.HEIGHT
-        ) > 100
-
-    return verticalOverflow || horizontalOverflow
+    return (
+        checkMaxSize(props.piecesPerRow, props.pieceSize, DIMENSIONS.WIDTH) ||
+        checkMaxSize(props.piecesPerColumn, props.pieceSize, DIMENSIONS.HEIGHT)
+    )
 })
 
 const verticalLines = computed(() => {

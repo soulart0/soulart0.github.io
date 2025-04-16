@@ -41,6 +41,7 @@ const results = ref({
                 :piecesPerColumn="results.piecesPerColumn"
                 :pieceSize="options.PIECE_SIZE"
                 :paperType="options.PAPER_TYPE"
+                :operations="operation.ops"
             />
         </div>
         <SendOrder :results="results" :operation="operation" :options="options" />
