@@ -14,6 +14,7 @@ import {
     ONE_SIDED_ONLY_PAPER_TYPES
 } from '@/constants/options'
 import { calculateQuartersNumber, calculatePiecesNumber, calculatePrice } from '@/utils/calculator'
+import { DEFAULT_OPERATION } from '@/constants/operations'
 
 const props = defineProps({
     operation: {
@@ -80,9 +81,10 @@ watch(
         options.value.QUARTERS_NUMBER,
         options.value.PIECE_SIZE.width,
         options.value.PIECE_SIZE.height,
-        options.value.PAPER_TYPE
+        options.value.PAPER_TYPE,
+        props.operation.key
     ],
-    ([pieces, quarters, width, height, paperType], prevVals) => {
+    ([pieces, quarters, width, height, paperType, operation], prevVals) => {
         if (isSyncUpdate.value) return
 
         // safe destructuring to avoid undefined values on initial mount
@@ -91,18 +93,19 @@ watch(
             prevQuarters = 0,
             prevWidth = 0,
             prevHeight = 0,
-            prevPaperType = DEFAULT_OPTIONS.PAPER_TYPE
+            prevPaperType = DEFAULT_OPTIONS.PAPER_TYPE,
+            prevOperation = DEFAULT_OPERATION
         ] = prevVals || []
 
         const piecesChanged = pieces !== prevPieces
         const quartersChanged = quarters !== prevQuarters
         const pieceSizeChanged = width !== prevWidth || height !== prevHeight
         const paperTypeChanged = paperType !== prevPaperType
+        const operationChanged = operation !== prevOperation
 
-        if (
-            (pieceSizeChanged || paperTypeChanged || piecesChanged) &&
-            !isUserEnteredQuartersNumber.value
-        ) {
+        const requireReCaclulation = pieceSizeChanged || paperTypeChanged || operationChanged
+
+        if ((requireReCaclulation || piecesChanged) && !isUserEnteredQuartersNumber.value) {
             isSyncUpdate.value = true
 
             const {
@@ -120,10 +123,7 @@ watch(
             isSyncUpdate.value = false
         }
 
-        if (
-            (pieceSizeChanged || paperTypeChanged || quartersChanged) &&
-            isUserEnteredQuartersNumber.value
-        ) {
+        if ((requireReCaclulation || quartersChanged) && isUserEnteredQuartersNumber.value) {
             isSyncUpdate.value = true
 
             const {
@@ -148,22 +148,43 @@ watch(
 <template>
     <div :class="bem({ element: 'Wrapper' })">
         <PieceSizeOptionElement :number="optionNumbers.pieceSize" v-model="options.PIECE_SIZE" />
-        <PiecesAndQuartersNumberOptionElement :number="optionNumbers.piecesAndQuarters"
-            v-model:piecesNumber="options.PIECES_NUMBER" v-model:quartersNumber="options.QUARTERS_NUMBER"
-            v-model:isUserEnteredQuartersNumber="isUserEnteredQuartersNumber" />
-        <SelectOptionElement v-if="operation.ops[OPS.PRINTING]" :number="optionNumbers.paperType"
-            :optionKey="OPTIONS.PAPER_TYPE.key" :types="PAPER_TYPES" v-model="options.PAPER_TYPE" />
-        <SelectOptionElement v-if="
-            operation.ops[OPS.PRINTING] &&
-            !ONE_SIDED_ONLY_PAPER_TYPES.includes(options.PAPER_TYPE)
-        " :number="optionNumbers.printingType" :optionKey="OPTIONS.PRINTING_TYPE.key" :types="PRINTING_TYPES"
-            v-model="options.PRINTING_TYPE" />
-        <SelectOptionElement v-if="operation.ops[OPS.PRINTING]" :number="optionNumbers.customerPaper"
-            :optionKey="OPTIONS.CUSTOMER_SUPPLIED_PAPER.key" :types="CUSTOMER_SUPPLIED_PAPER_TYPES"
-            v-model="options.CUSTOMER_SUPPLIED_PAPER" />
-        <SelectOptionElement v-if="operation.ops[OPS.PRINTING]" :number="optionNumbers.cellophaneCoatedPaper"
-            :optionKey="OPTIONS.CELLOPHANE_COATED_PAPER.key" :types="CELLOPHANE_COATED_PAPER_TYPES"
-            v-model="options.CELLOPHANE_COATED_PAPER" />
+        <PiecesAndQuartersNumberOptionElement
+            :number="optionNumbers.piecesAndQuarters"
+            v-model:piecesNumber="options.PIECES_NUMBER"
+            v-model:quartersNumber="options.QUARTERS_NUMBER"
+            v-model:isUserEnteredQuartersNumber="isUserEnteredQuartersNumber"
+        />
+        <SelectOptionElement
+            v-if="operation.ops[OPS.PRINTING]"
+            :number="optionNumbers.paperType"
+            :optionKey="OPTIONS.PAPER_TYPE.key"
+            :types="PAPER_TYPES"
+            v-model="options.PAPER_TYPE"
+        />
+        <SelectOptionElement
+            v-if="
+                operation.ops[OPS.PRINTING] &&
+                !ONE_SIDED_ONLY_PAPER_TYPES.includes(options.PAPER_TYPE)
+            "
+            :number="optionNumbers.printingType"
+            :optionKey="OPTIONS.PRINTING_TYPE.key"
+            :types="PRINTING_TYPES"
+            v-model="options.PRINTING_TYPE"
+        />
+        <SelectOptionElement
+            v-if="operation.ops[OPS.PRINTING]"
+            :number="optionNumbers.customerPaper"
+            :optionKey="OPTIONS.CUSTOMER_SUPPLIED_PAPER.key"
+            :types="CUSTOMER_SUPPLIED_PAPER_TYPES"
+            v-model="options.CUSTOMER_SUPPLIED_PAPER"
+        />
+        <SelectOptionElement
+            v-if="operation.ops[OPS.PRINTING]"
+            :number="optionNumbers.cellophaneCoatedPaper"
+            :optionKey="OPTIONS.CELLOPHANE_COATED_PAPER.key"
+            :types="CELLOPHANE_COATED_PAPER_TYPES"
+            v-model="options.CELLOPHANE_COATED_PAPER"
+        />
     </div>
 </template>
 
