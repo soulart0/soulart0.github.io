@@ -86,32 +86,64 @@ watch(
         </template>
 
         <div :class="bem({ element: 'Content' })">
-            <div :class="bem({ element: 'InputWrapper', mod: { disabled: isUserEnteredQuartersNumber } })
-                ">
-                <input :class="bem({ element: 'Input' })" type="number" v-model="piecesNumber"
-                    @input="isUserInput = true" @blur="validatePiecesNumber(piecesNumber, true)"
-                    :disabled="isUserEnteredQuartersNumber" />
+            <div
+                :class="
+                    bem({ element: 'InputWrapper', mod: { disabled: isUserEnteredQuartersNumber } })
+                "
+            >
+                <input
+                    :class="bem({ element: 'Input' })"
+                    type="number"
+                    v-model="piecesNumber"
+                    @input="isUserInput = true"
+                    @blur="validatePiecesNumber(piecesNumber, true)"
+                    :disabled="isUserEnteredQuartersNumber"
+                />
                 <span :class="bem({ element: 'Label' })"> {{ ' ' + $t(`units.piece`) }} </span>
             </div>
-            <PrimaryButton :class="bem({ element: 'Switch', mod: { rotate: isUserEnteredQuartersNumber } })"
-                @click="isUserEnteredQuartersNumber = !isUserEnteredQuartersNumber">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+            <PrimaryButton
+                :class="bem({ element: 'Switch', mod: { rotate: isUserEnteredQuartersNumber } })"
+                @click="isUserEnteredQuartersNumber = !isUserEnteredQuartersNumber"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    stroke="#ffffff"
+                >
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g
+                        id="SVGRepo_tracerCarrier"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    ></g>
                     <g id="SVGRepo_iconCarrier">
-                        <path d="M18 10L21 7M21 7L18 4M21 7H7M6 14L3 17M3 17L6 20M3 17H17" stroke="#fff"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path
+                            d="M18 10L21 7M21 7L18 4M21 7H7M6 14L3 17M3 17L6 20M3 17H17"
+                            stroke="#fff"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        ></path>
                     </g>
                 </svg>
             </PrimaryButton>
-            <div :class="bem({
-                element: 'InputWrapper',
-                mod: { disabled: !isUserEnteredQuartersNumber }
-            })
-                ">
-                <input :class="bem({ element: 'Input' })" type="number" v-model="quartersNumber"
-                    @input="isUserInput = true" @blur="validateQuartersNumber(quartersNumber, true)"
-                    :disabled="!isUserEnteredQuartersNumber" />
+            <div
+                :class="
+                    bem({
+                        element: 'InputWrapper',
+                        mod: { disabled: !isUserEnteredQuartersNumber }
+                    })
+                "
+            >
+                <input
+                    :class="bem({ element: 'Input' })"
+                    type="number"
+                    v-model="quartersNumber"
+                    @input="isUserInput = true"
+                    @blur="validateQuartersNumber(quartersNumber, true)"
+                    :disabled="!isUserEnteredQuartersNumber"
+                />
                 <span :class="bem({ element: 'Label' })">
                     {{ ' ' + $t(`units.quarter`) }}
                 </span>

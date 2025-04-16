@@ -28,12 +28,20 @@ const results = ref({
             <OperationSelector v-model="operation" />
         </div>
         <div :class="bem({ element: 'Wrapper' })">
-            <CalculatorForm v-model:options="options" v-model:results="results" :operation="operation" />
+            <CalculatorForm
+                v-model:options="options"
+                v-model:results="results"
+                :operation="operation"
+            />
         </div>
         <div :class="bem({ element: 'Wrapper', mod: { double: true } })">
             <InvoicePreview :results="results" :operation="operation" :options="options" />
-            <QuarterPreview :piecesPerRow="results.piecesPerRow" :piecesPerColumn="results.piecesPerColumn"
-                :pieceSize="options.PIECE_SIZE" :paperType="options.PAPER_TYPE" />
+            <QuarterPreview
+                :piecesPerRow="results.piecesPerRow"
+                :piecesPerColumn="results.piecesPerColumn"
+                :pieceSize="options.PIECE_SIZE"
+                :paperType="options.PAPER_TYPE"
+            />
         </div>
         <SendOrder :results="results" :operation="operation" :options="options" />
     </div>
