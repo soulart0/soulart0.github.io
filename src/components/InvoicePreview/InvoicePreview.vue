@@ -117,6 +117,10 @@ defineProps({
                     <td>{{ $t('invoice.price.quarter.total') }}</td>
                     <td>{{ results.quarterTotalPrice }} {{ $t('units.currency') }}</td>
                 </tr>
+                <tr v-if="operation.ops[OPS.PRINTING] && !operation.ops[OPS.CUTTING]">
+                    <td>{{ $t('invoice.price.cut.total') }}</td>
+                    <td>{{ results.cuttingMachinePrice }} {{ $t('units.currency') }}</td>
+                </tr>
                 <tr>
                     <td colspan="N"><br /></td>
                 </tr>

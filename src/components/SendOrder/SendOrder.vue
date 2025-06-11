@@ -95,6 +95,11 @@ const sendOrderViaWhatsApp = () => {
             props.results.quarterTotalPrice
         } ${i18n.global.t('units.currency')}\n`
     }
+    if (props.operation.ops[OPS.PRINTING] && !props.operation.ops[OPS.CUTTING]) {
+        message += `• ${i18n.global.t('invoice.price.cut.total')}: ${
+            props.results.cuttingMachinePrice
+        } ${i18n.global.t('units.currency')}\n`
+    }
 
     // Total price
     message += `\n*${i18n.global.t('invoice.price.total')}:* ${

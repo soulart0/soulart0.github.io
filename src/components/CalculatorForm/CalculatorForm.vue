@@ -9,6 +9,7 @@ import {
     PAPER_TYPES,
     PRINTING_TYPES,
     CELLOPHANE_TYPES,
+    CUT_TYPES,
     CELLOPHANE_COATED_PAPER_TYPES,
     CUSTOMER_SUPPLIED_PAPER_TYPES,
     DEFAULT_OPTIONS,
@@ -46,6 +47,10 @@ const visibleOptions = computed(() => {
         if (options.value.CELLOPHANE_COATED_PAPER !== CELLOPHANE_COATED_PAPER_TYPES.NONE) {
             ops.push('cellophaneType')
         }
+
+        if (!props.operation.ops[OPS.CUTTING]) {
+            ops.push('cut')
+        }
     }
 
     return ops
@@ -70,12 +75,18 @@ watch(
 watch(
     () => options.value,
     (newOptions) => {
-        const { quarterCuttingPrice, quarterPrintingPrice, quarterTotalPrice, totalPrice } =
-            calculatePrice(props.operation, newOptions, results.value.maxPiecesPerQuarter)
+        const {
+            quarterCuttingPrice,
+            quarterPrintingPrice,
+            quarterTotalPrice,
+            cuttingMachinePrice,
+            totalPrice
+        } = calculatePrice(props.operation, newOptions, results.value.maxPiecesPerQuarter)
 
         results.value.quarterCuttingPrice = quarterCuttingPrice
         results.value.quarterPrintingPrice = quarterPrintingPrice
         results.value.quarterTotalPrice = quarterTotalPrice
+        results.value.cuttingMachinePrice = cuttingMachinePrice
         results.value.totalPrice = totalPrice
     },
     { deep: true, immediate: true }
@@ -199,6 +210,13 @@ watch(
             :optionKey="OPTIONS.CELLOPHANE_TYPE.key"
             :types="CELLOPHANE_TYPES"
             v-model="options.CELLOPHANE_TYPE"
+        />
+        <SelectOptionElement
+            v-if="operation.ops[OPS.PRINTING] && !operation.ops[OPS.CUTTING]"
+            :number="optionNumbers.cut"
+            :optionKey="OPTIONS.CUT.key"
+            :types="CUT_TYPES"
+            v-model="options.CUT"
         />
     </div>
 </template>

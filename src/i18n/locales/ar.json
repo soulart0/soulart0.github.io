@@ -51,7 +51,8 @@
             "printing-type": "نوع الطباعة",
             "customer-supplied-paper": "هتوفر ورق الطباعة؟",
             "cellophane-coated-paper": "نوع تغليف السولوفان",
-            "cellophane-type": "نوع السولوفان"
+            "cellophane-type": "نوع السولوفان",
+            "cut": "هتدخل الورق للمقص؟"
         },
         "types": {
             "paper-type": {
@@ -76,6 +77,10 @@
             "cellophane-type": {
                 "matte": "مط",
                 "glossy": "لامع"
+            },
+            "cut": {
+                "yes": "نعم",
+                "no": "لا"
             }
         }
     },
@@ -98,6 +103,9 @@
                 "printing": "سعر طباعة الربع",
                 "cutting": "سعر قص الربع",
                 "total": "السعر الإجمالي للربع"
+            },
+            "cut": {
+                "total": "السعر الإجمالي للقص"
             },
             "total": "السعر الإجمالي"
         }

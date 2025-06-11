@@ -32,6 +32,11 @@ export const CELLOPHANE_TYPES = {
     GLOSSY: 'glossy'
 }
 
+export const CUT_TYPES = {
+    YES: 'yes',
+    NO: 'no'
+}
+
 export const OPTIONS = {
     PIECE_SIZE: {
         key: 'piece-size',
@@ -67,6 +72,10 @@ export const OPTIONS = {
     CELLOPHANE_TYPE: {
         key: 'cellophane-type',
         default: CELLOPHANE_TYPES.MATTE
+    },
+    CUT: {
+        key: 'cut',
+        default: CUT_TYPES.NO
     }
 }
 

@@ -18,6 +18,7 @@ const results = ref({
     quarterCuttingPrice: 0,
     quarterPrintingPrice: 0,
     quarterTotalPrice: 0,
+    cuttingMachinePrice: 0,
     totalPrice: 0
 })
 </script>

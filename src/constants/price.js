@@ -3,6 +3,10 @@ import { PAPER_TYPES, PRINTING_TYPES } from '@/constants/options'
 
 export const PIECE_MARGIN = 0.2
 
+export const CUTTING_MACHINE_PRICE = 40
+
+export const NUM_OF_QUARTERS_FOR_CUTTING_MACHINE_PRICE = 50
+
 export const QUARTER_SIZE = {
     [PAPER_TYPES.COUCHE_350G]: {
         [DIMENSIONS.HEIGHT]: 46, // Write here the highest value

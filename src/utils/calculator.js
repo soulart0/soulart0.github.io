@@ -3,9 +3,17 @@ import { OPS } from '@/constants/operations'
 import {
     CUSTOMER_SUPPLIED_PAPER_TYPES,
     PRINTING_TYPES,
-    CELLOPHANE_COATED_PAPER_TYPES
+    CELLOPHANE_COATED_PAPER_TYPES,
+    CUT_TYPES
 } from '@/constants/options'
-import { QUARTER_SIZE, PRINTING_PRICE, CUTTING_PRICE, PIECE_MARGIN } from '@/constants/price'
+import {
+    QUARTER_SIZE,
+    PRINTING_PRICE,
+    CUTTING_PRICE,
+    PIECE_MARGIN,
+    NUM_OF_QUARTERS_FOR_CUTTING_MACHINE_PRICE,
+    CUTTING_MACHINE_PRICE
+} from '@/constants/price'
 
 const getOrientationDetails = (pieceSize, paperType, operations) => {
     const { WIDTH, HEIGHT } = DIMENSIONS
@@ -134,18 +142,26 @@ const calculateCuttingPrice = (options, maxPiecesPerQuarter) => {
 }
 
 export const calculatePrice = (operation, options, maxPiecesPerQuarter) => {
-    const { QUARTERS_NUMBER } = options
+    const { QUARTERS_NUMBER, CUT } = options
 
     const quarterPrintingPrice = operation.ops[OPS.PRINTING] ? calculatePrintingPrice(options) : 0
     const quarterCuttingPrice = operation.ops[OPS.CUTTING]
         ? calculateCuttingPrice(options, maxPiecesPerQuarter)
         : 0
+
     const quarterTotalPrice = quarterCuttingPrice + quarterPrintingPrice
+
+    const cuttingMachinePrice =
+        operation.ops[OPS.PRINTING] && !operation.ops[OPS.CUTTING] && CUT === CUT_TYPES.YES
+            ? Math.ceil(QUARTERS_NUMBER / NUM_OF_QUARTERS_FOR_CUTTING_MACHINE_PRICE) *
+              CUTTING_MACHINE_PRICE
+            : 0
 
     return {
         quarterCuttingPrice,
         quarterPrintingPrice,
         quarterTotalPrice,
-        totalPrice: quarterTotalPrice * QUARTERS_NUMBER
+        cuttingMachinePrice,
+        totalPrice: quarterTotalPrice * QUARTERS_NUMBER + cuttingMachinePrice
     }
 }

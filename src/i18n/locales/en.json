@@ -40,7 +40,8 @@
             "printing-type": "Printing Type",
             "customer-supplied-paper": "Will you provide the printing paper?",
             "cellophane-coated-paper": "Cellophane Coating Type",
-            "cellophane-type": "Cellophane Type"
+            "cellophane-type": "Cellophane Type",
+            "cut": "Will you feed the paper into the cutter?"
         },
         "types": {
             "paper-type": {
@@ -65,6 +66,10 @@
             "cellophane-type": {
                 "matte": "Matte",
                 "glossy": "Glossy"
+            },
+            "cut": {
+                "yes": "Yes",
+                "no": "No"
             }
         }
     },
@@ -87,6 +92,9 @@
                 "printing": "Quarter Printing Price",
                 "cutting": "Quarter Cutting Price",
                 "total": "Quarter Total Price"
+            },
+            "cut": {
+                "total": "Cutting Total Price"
             },
             "total": "Total Price"
         }
