@@ -4,6 +4,7 @@ import PrimaryButton from 'components/PrimaryButton/PrimaryButton.vue'
 import { DIMENSIONS, WHATSAPP_NUMBER } from '@/constants/app'
 import { OPS } from '@/constants/operations'
 import { QUARTER_SIZE } from '@/constants/price'
+import { getOrderName } from '@/utils/mapper'
 
 import ar from '../../i18n/locales/ar.json'
 
@@ -33,6 +34,12 @@ const props = defineProps({
 const sendOrderViaWhatsApp = () => {
     // Construct message body
     let message = `*${i18n.global.t('invoice.title')}*\n\n`
+
+    // Order Name
+    message += `• ${i18n.global.t('invoice.order')}: ${getOrderName(
+        props.operation,
+        props.options
+    )}\n`
 
     // Order Type
     message += `• ${i18n.global.t('invoice.order-type')}: ${i18n.global.t(

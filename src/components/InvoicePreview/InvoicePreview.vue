@@ -3,6 +3,7 @@ import { DIMENSIONS } from '@/constants/app'
 import { OPS } from '@/constants/operations'
 import { OPTIONS, CELLOPHANE_COATED_PAPER_TYPES } from '@/constants/options'
 import { QUARTER_SIZE } from '@/constants/price'
+import { getOrderName } from '@/utils/mapper'
 
 defineProps({
     operation: {
@@ -28,6 +29,10 @@ defineProps({
 
         <table :class="bem({ element: 'InvoiceTable' })">
             <tbody>
+                <tr>
+                    <td>{{ $t('invoice.order') }}</td>
+                    <td>{{ getOrderName(operation, options) }}</td>
+                </tr>
                 <tr>
                     <td>{{ $t('invoice.order-type') }}</td>
                     <td>{{ $t(`calculator.operations.${operation.key}`) }}</td>

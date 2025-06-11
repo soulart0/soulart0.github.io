@@ -82,6 +82,7 @@
     },
     "invoice": {
         "title": "Order Details",
+        "order": "Order",
         "order-type": "Order Type",
         "customer-supplied-paper": "Customer Paper",
         "cellophane-coated-paper": "Cellophane-Coated",

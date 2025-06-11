@@ -27,7 +27,11 @@
         "select": "اختر",
         "enter": "أدخل",
         "width": "عرض",
-        "height": "ارتفاع"
+        "height": "ارتفاع",
+        "cut": "قص",
+        "cutter-plotter": "تشريح",
+        "print": "طباعة",
+        "cellophane": "سلوفان"
     },
     "units": {
         "cm": "سم",
@@ -93,6 +97,7 @@
     },
     "invoice": {
         "title": "تفاصيل الطلب",
+        "order": "الطلب",
         "order-type": "نوع الطلب",
         "customer-supplied-paper": "ورق العميل",
         "cellophane-coated-paper": "تغليف سولوفان",
