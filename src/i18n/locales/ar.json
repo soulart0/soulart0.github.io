@@ -50,7 +50,8 @@
             "paper-type": "نوع الورق",
             "printing-type": "نوع الطباعة",
             "customer-supplied-paper": "هتوفر ورق الطباعة؟",
-            "cellophane-coated-paper": "نوع تغليف السولوفان"
+            "cellophane-coated-paper": "نوع تغليف السولوفان",
+            "cellophane-type": "نوع السولوفان"
         },
         "types": {
             "paper-type": {
@@ -71,6 +72,10 @@
             "customer-supplied-paper": {
                 "yes": "نعم",
                 "no": "لا"
+            },
+            "cellophane-type": {
+                "matte": "مط",
+                "glossy": "لامع"
             }
         }
     },

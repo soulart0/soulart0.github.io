@@ -8,6 +8,7 @@ import {
     OPTIONS,
     PAPER_TYPES,
     PRINTING_TYPES,
+    CELLOPHANE_TYPES,
     CELLOPHANE_COATED_PAPER_TYPES,
     CUSTOMER_SUPPLIED_PAPER_TYPES,
     DEFAULT_OPTIONS,
@@ -41,6 +42,10 @@ const visibleOptions = computed(() => {
         }
 
         ops.push('customerPaper', 'cellophaneCoatedPaper')
+
+        if (options.value.CELLOPHANE_COATED_PAPER !== CELLOPHANE_COATED_PAPER_TYPES.NONE) {
+            ops.push('cellophaneType')
+        }
     }
 
     return ops
@@ -184,6 +189,16 @@ watch(
             :optionKey="OPTIONS.CELLOPHANE_COATED_PAPER.key"
             :types="CELLOPHANE_COATED_PAPER_TYPES"
             v-model="options.CELLOPHANE_COATED_PAPER"
+        />
+        <SelectOptionElement
+            v-if="
+                operation.ops[OPS.PRINTING] &&
+                options.CELLOPHANE_COATED_PAPER !== CELLOPHANE_COATED_PAPER_TYPES.NONE
+            "
+            :number="optionNumbers.cellophaneType"
+            :optionKey="OPTIONS.CELLOPHANE_TYPE.key"
+            :types="CELLOPHANE_TYPES"
+            v-model="options.CELLOPHANE_TYPE"
         />
     </div>
 </template>

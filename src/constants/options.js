@@ -27,6 +27,11 @@ export const CELLOPHANE_COATED_PAPER_TYPES = {
     NONE: 'none'
 }
 
+export const CELLOPHANE_TYPES = {
+    MATTE: 'matte',
+    GLOSSY: 'glossy'
+}
+
 export const OPTIONS = {
     PIECE_SIZE: {
         key: 'piece-size',
@@ -58,6 +63,10 @@ export const OPTIONS = {
     CELLOPHANE_COATED_PAPER: {
         key: 'cellophane-coated-paper',
         default: CELLOPHANE_COATED_PAPER_TYPES.NONE
+    },
+    CELLOPHANE_TYPE: {
+        key: 'cellophane-type',
+        default: CELLOPHANE_TYPES.MATTE
     }
 }
 

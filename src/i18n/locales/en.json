@@ -39,7 +39,8 @@
             "paper-type": "Paper Type",
             "printing-type": "Printing Type",
             "customer-supplied-paper": "Will you provide the printing paper?",
-            "cellophane-coated-paper": "Cellophane Coating Type"
+            "cellophane-coated-paper": "Cellophane Coating Type",
+            "cellophane-type": "Cellophane Type"
         },
         "types": {
             "paper-type": {
@@ -60,6 +61,10 @@
             "customer-supplied-paper": {
                 "yes": "Yes",
                 "no": "No"
+            },
+            "cellophane-type": {
+                "matte": "Matte",
+                "glossy": "Glossy"
             }
         }
     },

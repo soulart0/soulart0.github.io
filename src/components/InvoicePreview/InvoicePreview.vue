@@ -1,7 +1,7 @@
 <script setup>
 import { DIMENSIONS } from '@/constants/app'
 import { OPS } from '@/constants/operations'
-import { OPTIONS } from '@/constants/options'
+import { OPTIONS, CELLOPHANE_COATED_PAPER_TYPES } from '@/constants/options'
 import { QUARTER_SIZE } from '@/constants/price'
 
 defineProps({
@@ -59,16 +59,28 @@ defineProps({
                             {{ $t(`calculator.types.${OPTIONS[option].key}.${options[option]}`) }}
                         </td>
                     </tr>
-                    <tr
-                        v-for="(option, index) in [
-                            'CUSTOMER_SUPPLIED_PAPER',
-                            'CELLOPHANE_COATED_PAPER'
-                        ]"
-                        :key="index"
-                    >
+                    <tr v-for="(option, index) in ['CUSTOMER_SUPPLIED_PAPER']" :key="index">
                         <td>{{ $t(`invoice.${OPTIONS[option].key}`) }}</td>
                         <td>
                             {{ $t(`calculator.types.${OPTIONS[option].key}.${options[option]}`) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ $t(`invoice.${OPTIONS['CELLOPHANE_COATED_PAPER'].key}`) }}</td>
+                        <td>
+                            {{
+                                $t(
+                                    `calculator.types.${OPTIONS['CELLOPHANE_COATED_PAPER'].key}.${options['CELLOPHANE_COATED_PAPER']}`
+                                )
+                            }}
+                            {{
+                                options['CELLOPHANE_COATED_PAPER'] !==
+                                CELLOPHANE_COATED_PAPER_TYPES.NONE
+                                    ? $t(
+                                          `calculator.types.${OPTIONS['CELLOPHANE_TYPE'].key}.${options['CELLOPHANE_TYPE']}`
+                                      )
+                                    : ''
+                            }}
                         </td>
                     </tr>
                 </template>

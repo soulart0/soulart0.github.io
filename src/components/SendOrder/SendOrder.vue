@@ -53,17 +53,17 @@ const sendOrderViaWhatsApp = () => {
     // Printing-related details
     if (props.operation.ops[OPS.PRINTING]) {
         message += `• ${i18n.global.t('calculator.options.paper-type')}: ${i18n.global.t(
-            `calculator.paper-types.${props.options.PAPER_TYPE}`
+            `calculator.types.paper-type.${props.options.PAPER_TYPE}`
         )}\n`
         message += `• ${i18n.global.t('calculator.options.printing-type')}: ${i18n.global.t(
-            `calculator.printing-types.${props.options.PRINTING_TYPE}`
+            `calculator.types.printing-type.${props.options.PRINTING_TYPE}`
         )}\n`
         message += `• ${i18n.global.t('invoice.customer-supplied-paper')}: ${i18n.global.t(
-            `calculator.boolean-options.${props.options.CUSTOMER_SUPPLIED_PAPER}`
+            `calculator.types.customer-supplied-paper.${props.options.CUSTOMER_SUPPLIED_PAPER}`
         )}\n`
         message += `• ${i18n.global.t('invoice.cellophane-coated-paper')}: ${i18n.global.t(
-            `calculator.boolean-options.${props.options.CELLOPHANE_COATED_PAPER}`
-        )}\n`
+            `calculator.types.cellophane-coated-paper.${props.options.CELLOPHANE_COATED_PAPER}`
+        )} ${i18n.global.t(`calculator.types.cellophane-type.${props.options.CELLOPHANE_TYPE}`)}\n`
     }
 
     message += `\n• ${i18n.global.t('invoice.pieces-per-quarter')}:\n  - ${
