@@ -19,6 +19,9 @@
         "width": "width",
         "height": "height"
     },
+    "toast": {
+        "order-copied": "Order copied to clipboard"
+    },
     "units": {
         "cm": "cm",
         "piece": "pieces",

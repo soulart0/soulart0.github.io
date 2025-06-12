@@ -1,11 +1,12 @@
 <script setup>
+import { ref, computed } from 'vue'
 import { DIMENSIONS } from '@/constants/app'
 import { OPS } from '@/constants/operations'
 import { OPTIONS, CELLOPHANE_COATED_PAPER_TYPES } from '@/constants/options'
 import { QUARTER_SIZE } from '@/constants/price'
 import { getOrderName } from '@/utils/mapper'
 
-defineProps({
+const props = defineProps({
     operation: {
         type: Object,
         required: true
@@ -19,6 +20,17 @@ defineProps({
         required: true
     }
 })
+
+const showCopyToast = ref(false)
+
+const orderName = computed(() => getOrderName(props.operation, props.options))
+
+const copyOrderToClipboard = () => {
+    navigator.clipboard.writeText(orderName.value).then(() => {
+        showCopyToast.value = true
+        setTimeout(() => (showCopyToast.value = false), 2000)
+    })
+}
 </script>
 
 <template>
@@ -31,7 +43,9 @@ defineProps({
             <tbody>
                 <tr>
                     <td>{{ $t('invoice.order') }}</td>
-                    <td>{{ getOrderName(operation, options) }}</td>
+                    <td @click="copyOrderToClipboard" :class="bem({ element: 'OrderName' })">
+                        {{ orderName }}
+                    </td>
                 </tr>
                 <tr>
                     <td>{{ $t('invoice.order-type') }}</td>
@@ -135,6 +149,10 @@ defineProps({
                 </tr>
             </tbody>
         </table>
+
+        <div :class="bem({ element: 'CopyToast', mod: { hidden: !showCopyToast } })">
+            {{ $t('toast.order-copied') }}
+        </div>
     </div>
 </template>
 
