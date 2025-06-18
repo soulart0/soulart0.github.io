@@ -38,7 +38,8 @@ const sendOrderViaWhatsApp = () => {
     // Order Name
     message += `• ${i18n.global.t('invoice.order')}: ${getOrderName(
         props.operation,
-        props.options
+        props.options,
+        props.results.maxPiecesPerQuarter
     )}\n`
 
     // Order Type

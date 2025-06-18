@@ -13,7 +13,7 @@ const i18n = createI18n({
     messages: { ar }
 })
 
-export const getOrderName = (operation, options) => {
+export const getOrderName = (operation, options, maxPiecesPerQuarter) => {
     if (!operation.ops[OPS.PRINTING]) {
         return i18n.global.t('general.cut')
     }
@@ -53,8 +53,10 @@ export const getOrderName = (operation, options) => {
         orderElements.push(i18n.global.t('general.cut'))
     }
 
-    orderElements.push('-')
-    orderElements.push(`${options.BEND_LINES_NUMBER} ${i18n.global.t('units.bend-line')}`)
+    if (options.BEND_LINES_NUMBER > 0) {
+        orderElements.push('-')
+        orderElements.push(`${options.BEND_LINES_NUMBER} ${i18n.global.t('units.bend-line')}`)
+    }
 
     if (operation.ops[OPS.CUTTING]) {
         orderElements.push('-')
@@ -62,6 +64,10 @@ export const getOrderName = (operation, options) => {
             `${options.PIECE_SIZE[DIMENSIONS.WIDTH]}x${
                 options.PIECE_SIZE[DIMENSIONS.HEIGHT]
             }${i18n.global.t('units.cm')}`
+        )
+
+        orderElements.push(
+            `${options.QUARTERS_NUMBER * maxPiecesPerQuarter} ${i18n.global.t('units.piece')}`
         )
     }
 

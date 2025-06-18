@@ -23,7 +23,9 @@ const props = defineProps({
 
 const showCopyToast = ref(false)
 
-const orderName = computed(() => getOrderName(props.operation, props.options))
+const orderName = computed(() =>
+    getOrderName(props.operation, props.options, props.results.maxPiecesPerQuarter)
+)
 
 const copyOrderToClipboard = () => {
     navigator.clipboard.writeText(orderName.value).then(() => {
