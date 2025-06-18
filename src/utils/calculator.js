@@ -12,7 +12,8 @@ import {
     CUTTING_PRICE,
     PIECE_MARGIN,
     NUM_OF_QUARTERS_FOR_CUTTING_MACHINE_PRICE,
-    CUTTING_MACHINE_PRICE
+    CUTTING_MACHINE_PRICE,
+    BENDING_LINE_PRICE
 } from '@/constants/price'
 
 const getOrientationDetails = (pieceSize, paperType, operations) => {
@@ -142,7 +143,7 @@ const calculateCuttingPrice = (options, maxPiecesPerQuarter) => {
 }
 
 export const calculatePrice = (operation, options, maxPiecesPerQuarter) => {
-    const { QUARTERS_NUMBER, CUT } = options
+    const { QUARTERS_NUMBER, CUT, BEND_LINES_NUMBER } = options
 
     const quarterPrintingPrice = operation.ops[OPS.PRINTING] ? calculatePrintingPrice(options) : 0
     const quarterCuttingPrice = operation.ops[OPS.CUTTING]
@@ -157,11 +158,15 @@ export const calculatePrice = (operation, options, maxPiecesPerQuarter) => {
               CUTTING_MACHINE_PRICE
             : 0
 
+    const bendingPrice =
+        BENDING_LINE_PRICE * BEND_LINES_NUMBER * QUARTERS_NUMBER * maxPiecesPerQuarter
+
     return {
         quarterCuttingPrice,
         quarterPrintingPrice,
         quarterTotalPrice,
         cuttingMachinePrice,
-        totalPrice: quarterTotalPrice * QUARTERS_NUMBER + cuttingMachinePrice
+        bendingPrice,
+        totalPrice: quarterTotalPrice * QUARTERS_NUMBER + cuttingMachinePrice + bendingPrice
     }
 }

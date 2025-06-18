@@ -28,8 +28,8 @@
         "enter": "أدخل",
         "width": "عرض",
         "height": "ارتفاع",
-        "cut": "قص",
-        "cutter-plotter": "تشريح",
+        "cut": "مقص",
+        "cutter-plotter": "كاتر",
         "print": "طباعة",
         "cellophane": "سلوفان"
     },
@@ -41,7 +41,8 @@
         "g": "جرام",
         "piece": "قطعة",
         "quarter": "ربع",
-        "currency": "جنيه"
+        "currency": "جنيه",
+        "bend-line": "خط ريجا"
     },
     "calculator": {
         "choose-an-operation": "محتاج تعمل ايه؟",
@@ -59,7 +60,8 @@
             "customer-supplied-paper": "هتوفر ورق الطباعة؟",
             "cellophane-coated-paper": "نوع تغليف السولوفان",
             "cellophane-type": "نوع السولوفان",
-            "cut": "هتدخل الورق للمقص؟"
+            "cut": "هتدخل الورق للمقص؟",
+            "bend-lines-number": "عدد خطوط الريجا (الثني) للقطعة"
         },
         "types": {
             "paper-type": {
@@ -96,7 +98,8 @@
         "max-piece-size": "الحد الأقصى ل{dimension} القطعة هو {value} سم.",
         "not-a-number": "يرجى إدخال رقم صحيح.",
         "min-pieces-number": "الحد الأدنى لعدد القطع هو {value}.",
-        "min-quarters-number": "الحد الأدنى لعدد الأرباع هو {value}."
+        "min-quarters-number": "الحد الأدنى لعدد الأرباع هو {value}.",
+        "min-bend-lines-number": "الحد الأدنى لعدد خطوط الريجة هو {value}."
     },
     "invoice": {
         "title": "تفاصيل الطلب",
@@ -114,6 +117,9 @@
             },
             "cut": {
                 "total": "السعر الإجمالي للقص"
+            },
+            "bend-lines": {
+                "total": "السعر الإجمالي لخطوط الريجا"
             },
             "total": "السعر الإجمالي"
         }

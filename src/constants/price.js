@@ -7,6 +7,8 @@ export const CUTTING_MACHINE_PRICE = 40
 
 export const NUM_OF_QUARTERS_FOR_CUTTING_MACHINE_PRICE = 50
 
+export const BENDING_LINE_PRICE = 0.5
+
 export const QUARTER_SIZE = {
     [PAPER_TYPES.COUCHE_350G]: {
         [DIMENSIONS.HEIGHT]: 46, // Write here the highest value

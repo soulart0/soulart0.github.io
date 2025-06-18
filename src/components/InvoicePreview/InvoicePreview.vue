@@ -61,6 +61,13 @@ const copyOrderToClipboard = () => {
                     </td>
                 </tr>
                 <tr>
+                    <td>{{ $t('calculator.options.bend-lines-number') }}</td>
+                    <td>
+                        {{ options.BEND_LINES_NUMBER }}
+                        {{ $t('units.bend-line') }}
+                    </td>
+                </tr>
+                <tr>
                     <td>{{ $t('calculator.options.pieces-number') }}</td>
                     <td>
                         {{ results.maxPiecesPerQuarter * options.QUARTERS_NUMBER }}
@@ -139,6 +146,10 @@ const copyOrderToClipboard = () => {
                 <tr v-if="operation.ops[OPS.PRINTING] && !operation.ops[OPS.CUTTING]">
                     <td>{{ $t('invoice.price.cut.total') }}</td>
                     <td>{{ results.cuttingMachinePrice }} {{ $t('units.currency') }}</td>
+                </tr>
+                <tr v-if="results.bendingPrice > 0">
+                    <td>{{ $t('invoice.price.bend-lines.total') }}</td>
+                    <td>{{ results.bendingPrice }} {{ $t('units.currency') }}</td>
                 </tr>
                 <tr>
                     <td colspan="N"><br /></td>

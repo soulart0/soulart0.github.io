@@ -2,6 +2,8 @@
 import { defineModel, ref, watch, computed } from 'vue'
 import PieceSizeOptionElement from 'components/PieceSizeOptionElement/PieceSizeOptionElement.vue'
 import PiecesAndQuartersNumberOptionElement from 'components/PiecesAndQuartersNumberOptionElement/PiecesAndQuartersNumberOptionElement.vue'
+import NumberOptionElement from 'components/NumberOptionElement/NumberOptionElement.vue'
+
 import SelectOptionElement from 'components/SelectOptionElement/SelectOptionElement.vue'
 import { OPS } from '@/constants/operations'
 import {
@@ -51,6 +53,8 @@ const visibleOptions = computed(() => {
         if (!props.operation.ops[OPS.CUTTING]) {
             ops.push('cut')
         }
+
+        ops.push('bendLinesNumber')
     }
 
     return ops
@@ -80,7 +84,8 @@ watch(
             quarterPrintingPrice,
             quarterTotalPrice,
             cuttingMachinePrice,
-            totalPrice
+            totalPrice,
+            bendingPrice
         } = calculatePrice(props.operation, newOptions, results.value.maxPiecesPerQuarter)
 
         results.value.quarterCuttingPrice = quarterCuttingPrice
@@ -88,6 +93,7 @@ watch(
         results.value.quarterTotalPrice = quarterTotalPrice
         results.value.cuttingMachinePrice = cuttingMachinePrice
         results.value.totalPrice = totalPrice
+        results.value.bendingPrice = bendingPrice
     },
     { deep: true, immediate: true }
 )
@@ -217,6 +223,12 @@ watch(
             :optionKey="OPTIONS.CUT.key"
             :types="CUT_TYPES"
             v-model="options.CUT"
+        />
+        <NumberOptionElement
+            :number="optionNumbers.bendLinesNumber"
+            :optionKey="OPTIONS.BEND_LINES_NUMBER.key"
+            unitKey="bend-line"
+            v-model="options.BEND_LINES_NUMBER"
         />
     </div>
 </template>

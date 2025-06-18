@@ -50,6 +50,10 @@ const sendOrderViaWhatsApp = () => {
     message += `• ${i18n.global.t('calculator.options.piece-size')}: ${
         props.options.PIECE_SIZE[DIMENSIONS.WIDTH]
     }x${props.options.PIECE_SIZE[DIMENSIONS.HEIGHT]}${i18n.global.t('units.cm')}\n`
+    message += `• ${i18n.global.t('calculator.options.bend-lines-number')}: ${
+        props.options.BEND_LINES_NUMBER
+    } ${i18n.global.t('units.bend-lines')}\n`
+
     message += `• ${i18n.global.t('calculator.options.pieces-number')}: ${
         props.results.maxPiecesPerQuarter * props.options.QUARTERS_NUMBER
     } ${i18n.global.t('units.piece')}\n`
@@ -105,6 +109,11 @@ const sendOrderViaWhatsApp = () => {
     if (props.operation.ops[OPS.PRINTING] && !props.operation.ops[OPS.CUTTING]) {
         message += `• ${i18n.global.t('invoice.price.cut.total')}: ${
             props.results.cuttingMachinePrice
+        } ${i18n.global.t('units.currency')}\n`
+    }
+    if (props.results.bendingPrice > 0) {
+        message += `• ${i18n.global.t('invoice.price.bend-lines.total')}: ${
+            props.results.bendingPrice
         } ${i18n.global.t('units.currency')}\n`
     }
 

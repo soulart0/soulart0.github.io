@@ -26,7 +26,8 @@
         "cm": "cm",
         "piece": "pieces",
         "quarter": "quarters",
-        "currency": "EGP"
+        "currency": "EGP",
+        "lines": "lines"
     },
     "calculator": {
         "choose-an-operation": "What do you need to do?",
@@ -44,7 +45,8 @@
             "customer-supplied-paper": "Will you provide the printing paper?",
             "cellophane-coated-paper": "Cellophane Coating Type",
             "cellophane-type": "Cellophane Type",
-            "cut": "Will you feed the paper into the cutter?"
+            "cut": "Will you feed the paper into the cutter?",
+            "bend-lines-number": "Number of folding lines per piece?"
         },
         "types": {
             "paper-type": {
@@ -81,7 +83,8 @@
         "max-piece-size": "The maximum piece {dimension} is {value}cm.",
         "not-a-number": "Please enter a valid number.",
         "min-pieces-number": "The minimum number of pieces is {value}.",
-        "min-quarters-number": "The minimum number of quarters is {value}."
+        "min-quarters-number": "The minimum number of quarters is {value}.",
+        "min-bend-lines-number": "The minimum number of folding lines is {value}."
     },
     "invoice": {
         "title": "Order Details",
@@ -99,6 +102,9 @@
             },
             "cut": {
                 "total": "Cutting Total Price"
+            },
+            "bend-lines": {
+                "total": "Bending Lines Total Price"
             },
             "total": "Total Price"
         }

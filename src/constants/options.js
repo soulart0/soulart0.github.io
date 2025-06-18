@@ -76,6 +76,10 @@ export const OPTIONS = {
     CUT: {
         key: 'cut',
         default: CUT_TYPES.NO
+    },
+    BEND_LINES_NUMBER: {
+        key: 'bend-lines-number',
+        default: 0
     }
 }
 
