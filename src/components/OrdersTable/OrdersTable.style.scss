@@ -27,6 +27,10 @@
         flex-direction: row;
         justify-content: space-between;
         width: 100%;
+
+        @include tablet-and-mobile {
+            flex-direction: column;
+        }
     }
 
     &-Header {
