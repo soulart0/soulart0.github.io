@@ -83,6 +83,18 @@ export const OPTIONS = {
     }
 }
 
+export const DEFAULT_RESULTS = {
+    maxPiecesPerQuarter: 0,
+    piecesPerRow: 0,
+    piecesPerColumn: 0,
+    quarterCuttingPrice: 0,
+    quarterPrintingPrice: 0,
+    quarterTotalPrice: 0,
+    cuttingMachinePrice: 0,
+    bendingPrice: 0,
+    totalPrice: 0
+}
+
 export const DEFAULT_OPTIONS = Object.fromEntries(
     Object.entries(OPTIONS).map(([key, value]) => [key, value.default])
 )

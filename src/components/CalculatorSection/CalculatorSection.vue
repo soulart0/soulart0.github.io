@@ -5,22 +5,14 @@ import InvoicePreview from 'components/InvoicePreview/InvoicePreview.vue'
 import OperationSelector from 'components/OperationSelector/OperationSelector.vue'
 import QuarterPreview from 'components/QuarterPreview/QuarterPreview.vue'
 import SendOrder from 'components/SendOrder/SendOrder.vue'
+import OrdersTable from 'components/OrdersTable/OrdersTable.vue'
 
 import { DEFAULT_OPERATION } from '@/constants/operations'
-import { DEFAULT_OPTIONS } from '@/constants/options'
+import { DEFAULT_OPTIONS, DEFAULT_RESULTS } from '@/constants/options'
 
 const operation = ref(DEFAULT_OPERATION)
 const options = ref(DEFAULT_OPTIONS)
-const results = ref({
-    maxPiecesPerQuarter: 0,
-    piecesPerRow: 0,
-    piecesPerColumn: 0,
-    quarterCuttingPrice: 0,
-    quarterPrintingPrice: 0,
-    quarterTotalPrice: 0,
-    cuttingMachinePrice: 0,
-    totalPrice: 0
-})
+const results = ref(DEFAULT_RESULTS)
 </script>
 
 <template>
@@ -46,6 +38,11 @@ const results = ref({
             />
         </div>
         <SendOrder :results="results" :operation="operation" :options="options" />
+        <OrdersTable
+            v-model:operation="operation"
+            v-model:options="options"
+            v-model:results="results"
+        />
     </div>
 </template>
 

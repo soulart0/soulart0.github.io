@@ -1,0 +1,158 @@
+.OrdersTable {
+    &-Wrapper {
+        width: 70%;
+        margin: 2rem auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 3rem;
+        font-family: system-ui;
+        font-size: 1.5rem;
+        font-size: clamp(1.2rem, 1.14rem + 0.3vw, 1.5rem);
+        line-height: 1.6;
+
+        @include tablet-and-mobile {
+            width: 95%;
+            margin: 1rem auto;
+            padding: 2rem 1rem 1rem 1rem;
+            font-size: 1.3rem;
+            font-size: clamp(1.3rem, 1.14rem + 0.3vw, 1.5rem);
+        }
+    }
+
+    &-HeaderWrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    &-Header {
+        font-size: 2rem;
+        font-size: clamp(1.5rem, 1.4rem + 0.5vw, 2rem);
+        text-transform: capitalize;
+        text-align: center;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+
+        @include tablet-and-mobile {
+            font-size: 1.5rem;
+            font-size: clamp(1.5rem, 1.4rem + 0.5vw, 2rem);
+        }
+    }
+
+    &-Actions {
+        display: flex;
+        gap: 1rem;
+
+        @include tablet-and-mobile {
+            flex-direction: column;
+            width: 100%;
+            gap: 0.75rem;
+        }
+    }
+
+    &-Table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+        border: 2px solid var(--primary-base-color);
+        border-radius: 0.5rem;
+        overflow: hidden;
+
+        th,
+        td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--primary-base-color);
+
+            html[dir='rtl'] & {
+                text-align: right;
+            }
+
+            @include tablet-and-mobile {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+    }
+
+    &-HeaderRow {
+        th {
+            background-color: var(--primary-base-color);
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-bottom: none;
+
+            &:first-child {
+                width: 70%;
+
+                @include tablet-and-mobile {
+                    width: 65%;
+                }
+            }
+
+            &:last-child {
+                width: 30%;
+
+                @include tablet-and-mobile {
+                    width: 35%;
+                }
+            }
+        }
+    }
+
+    &-Row {
+        color: var(--color-black);
+
+        &:hover {
+            background-color: #f5f5f540;
+        }
+
+        &:last-child {
+            td {
+                border-bottom: none;
+            }
+        }
+    }
+
+    &-OrderName {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+    &-EmptyRow {
+        td {
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+            padding: 2rem 1rem;
+        }
+    }
+
+    &-EmptyMessage {
+        text-align: center !important;
+    }
+
+    &-CopyToast {
+        position: fixed;
+        bottom: 5%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--primary-base-color);
+        color: #fff;
+        padding: 0.75rem 1.5rem;
+        border-radius: 1.25rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        font-size: 1rem;
+        z-index: 9999;
+        transition: opacity 0.3s ease-in-out;
+
+        &_hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+}

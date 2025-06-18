@@ -109,5 +109,17 @@
             "total": "Total Price"
         }
     },
-    "send-order-via-whatsapp": "Send Order via WhatsApp"
+    "send-order-via-whatsapp": "Send Order via WhatsApp",
+    "orders-table": {
+        "title": "Orders",
+        "actions": {
+            "new-order": "New Order",
+            "clear-orders": "Clear Orders"
+        },
+        "order": {
+            "name": "Order Name",
+            "price": "Total Price"
+        },
+        "empty": "No orders yet."
+    }
 }

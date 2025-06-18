@@ -124,5 +124,17 @@
             "total": "السعر الإجمالي"
         }
     },
-    "send-order-via-whatsapp": "إبعت الطلب على الواتساب"
+    "send-order-via-whatsapp": "إبعت الطلب على الواتساب",
+    "orders-table": {
+        "title": "الطلبات",
+        "actions": {
+            "new-order": "طلب جديد",
+            "clear-orders": "مسح الطلبات"
+        },
+        "order": {
+            "name": "اسم الطلب",
+            "price": "السعر الإجمالي"
+        },
+        "empty": "لا توجد طلبات بعد."
+    }
 }
