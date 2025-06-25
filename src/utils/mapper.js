@@ -20,6 +20,7 @@ export const getOrderName = (operation, options, maxPiecesPerQuarter) => {
 
     const orderElements = []
 
+    orderElements.push('عدد')
     orderElements.push(options.QUARTERS_NUMBER + ' ' + i18n.global.t('units.quarter'))
     orderElements.push(i18n.global.t('general.print'))
     orderElements.push(
@@ -61,13 +62,13 @@ export const getOrderName = (operation, options, maxPiecesPerQuarter) => {
     if (operation.ops[OPS.CUTTING]) {
         orderElements.push('-')
         orderElements.push(
-            `${options.PIECE_SIZE[DIMENSIONS.WIDTH]}x${
+            `${options.PIECE_SIZE[DIMENSIONS.WIDTH]}*${
                 options.PIECE_SIZE[DIMENSIONS.HEIGHT]
             }${i18n.global.t('units.cm')}`
         )
 
         orderElements.push(
-            `${options.QUARTERS_NUMBER * maxPiecesPerQuarter} ${i18n.global.t('units.piece')}`
+            `(${options.QUARTERS_NUMBER * maxPiecesPerQuarter} ${i18n.global.t('units.piece')})`
         )
     }
 
