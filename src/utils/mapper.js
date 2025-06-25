@@ -13,7 +13,9 @@ const i18n = createI18n({
     messages: { ar }
 })
 
-export const getOrderName = (operation, options, maxPiecesPerQuarter) => {
+export const getOrderName = (operation, options, results) => {
+    const { maxPiecesPerQuarter, totalPrice } = results
+
     if (!operation.ops[OPS.PRINTING]) {
         return i18n.global.t('general.cut')
     }
@@ -71,6 +73,8 @@ export const getOrderName = (operation, options, maxPiecesPerQuarter) => {
             `(${options.QUARTERS_NUMBER * maxPiecesPerQuarter} ${i18n.global.t('units.piece')})`
         )
     }
+
+    orderElements.push(`[${totalPrice} ج.م.]`)
 
     return orderElements.join(' ')
 }
