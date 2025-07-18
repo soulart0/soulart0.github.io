@@ -114,6 +114,7 @@
         "title": "Orders",
         "actions": {
             "new-order": "New Order",
+            "copy-orders": "Copy Orders",
             "clear-orders": "Clear Orders"
         },
         "order": {

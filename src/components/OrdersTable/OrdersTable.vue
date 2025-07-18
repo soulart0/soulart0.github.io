@@ -34,6 +34,10 @@ const newOrder = () => {
     nextTick(() => scrollToTop())
 }
 
+const copyOrders = () => {
+    navigator.clipboard.writeText(orders.value.map((order) => order.name).join('\n'))
+}
+
 const clearOrders = () => {
     orders.value = []
 
@@ -83,6 +87,9 @@ const copyOrderToClipboard = (index) => {
             <div :class="bem({ element: 'Actions' })">
                 <SecondaryButton @click="newOrder">
                     {{ $t('orders-table.actions.new-order') }}
+                </SecondaryButton>
+                <SecondaryButton @click="copyOrders">
+                    {{ $t('orders-table.actions.copy-orders') }}
                 </SecondaryButton>
                 <DangerButton @click="clearOrders">
                     {{ $t('orders-table.actions.clear-orders') }}

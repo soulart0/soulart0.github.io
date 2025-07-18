@@ -129,6 +129,7 @@
         "title": "الطلبات",
         "actions": {
             "new-order": "طلب جديد",
+            "copy-orders": "نسخ الطلبات",
             "clear-orders": "مسح الطلبات"
         },
         "order": {
