@@ -61,7 +61,10 @@ export const getOrderName = (operation, options, results) => {
         orderElements.push(`${options.BEND_LINES_NUMBER} ${i18n.global.t('units.bend-line')}`)
     }
 
-    if (operation.ops[OPS.CUTTING]) {
+    if (
+        operation.ops[OPS.CUTTING] ||
+        (operation.ops[OPS.PRINTING] && options.CUT === CUT_TYPES.YES)
+    ) {
         orderElements.push('-')
         orderElements.push(
             `${options.PIECE_SIZE[DIMENSIONS.WIDTH]}*${
