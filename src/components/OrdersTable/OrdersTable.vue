@@ -35,7 +35,7 @@ const newOrder = () => {
 }
 
 const copyOrders = () => {
-    copyToClipboard(orders.value.map((order) => order.name).join('\n'))
+    copyToClipboard(orders.value.map((order) => order.name).join('\n\n'))
 }
 
 const clearOrders = () => {
