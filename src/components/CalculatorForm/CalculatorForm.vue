@@ -77,8 +77,8 @@ watch(
     }
 )
 watch(
-    () => options.value,
-    (newOptions) => {
+    () => [options.value, props.operation],
+    ([options, operation]) => {
         const {
             quarterCuttingPrice,
             quarterPrintingPrice,
@@ -86,7 +86,7 @@ watch(
             cuttingMachinePrice,
             totalPrice,
             bendingPrice
-        } = calculatePrice(props.operation, newOptions, results.value.maxPiecesPerQuarter)
+        } = calculatePrice(operation, options, results.value.maxPiecesPerQuarter)
 
         results.value.quarterCuttingPrice = quarterCuttingPrice
         results.value.quarterPrintingPrice = quarterPrintingPrice
