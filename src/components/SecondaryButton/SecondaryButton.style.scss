@@ -29,6 +29,11 @@
         background: var(--primary-base-color);
     }
 
+    &:disabled {
+        background: var(--primary-dark-color);
+        cursor: not-allowed;
+    }
+
     &_active {
         background: var(--primary-base-color);
 

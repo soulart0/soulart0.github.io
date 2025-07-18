@@ -4,6 +4,10 @@ defineProps({
         type: Boolean,
         default: false
     },
+    disabled: {
+        type: Boolean,
+        default: false
+    },
     combobox: {
         type: Boolean,
         default: false
@@ -16,7 +20,10 @@ defineProps({
 </script>
 
 <template>
-    <button :class="bem({ mod: { active: active || !combobox, combobox, inversed: inversedDir } })">
+    <button
+        :class="bem({ mod: { active: active || !combobox, combobox, inversed: inversedDir } })"
+        :disabled="disabled"
+    >
         <slot></slot>
     </button>
 </template>

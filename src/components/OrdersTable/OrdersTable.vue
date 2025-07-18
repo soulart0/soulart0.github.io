@@ -92,7 +92,7 @@ const copyToClipboard = (text) => {
                 <SecondaryButton @click="newOrder">
                     {{ $t('orders-table.actions.new-order') }}
                 </SecondaryButton>
-                <SecondaryButton @click="copyOrders">
+                <SecondaryButton @click="copyOrders" :disabled="orders.length === 0">
                     {{ $t('orders-table.actions.copy-orders') }}
                 </SecondaryButton>
                 <DangerButton @click="clearOrders">
