@@ -35,7 +35,7 @@ const newOrder = () => {
 }
 
 const copyOrders = () => {
-    navigator.clipboard.writeText(orders.value.map((order) => order.name).join('\n'))
+    copyToClipboard(orders.value.map((order) => order.name).join('\n'))
 }
 
 const clearOrders = () => {
@@ -70,7 +70,11 @@ const removeOrder = (index) => {
 }
 
 const copyOrderToClipboard = (index) => {
-    navigator.clipboard.writeText(orders.value[index].name).then(() => {
+    copyToClipboard(orders.value[index].name)
+}
+
+const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text).then(() => {
         showCopyToast.value = true
         setTimeout(() => (showCopyToast.value = false), 2000)
     })
