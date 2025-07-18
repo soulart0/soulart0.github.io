@@ -89,21 +89,14 @@
             font-weight: 600;
             font-size: 1.1rem;
             border-bottom: none;
+            width: 20%;
 
             &:first-child {
                 width: 70%;
-
-                @include tablet-and-mobile {
-                    width: 65%;
-                }
             }
 
             &:last-child {
-                width: 30%;
-
-                @include tablet-and-mobile {
-                    width: 35%;
-                }
+                width: 10%;
             }
         }
     }
@@ -125,6 +118,19 @@
     &-OrderName {
         cursor: pointer;
         text-decoration: underline;
+    }
+
+    &-OrderActions {
+        justify-content: center;
+        align-items: center;
+        text-align: center !important;
+
+        & svg {
+            cursor: pointer;
+            width: 2.5rem;
+            aspect-ratio: 1;
+            margin: auto;
+        }
     }
 
     &-EmptyRow {

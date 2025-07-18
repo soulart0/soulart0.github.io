@@ -2,6 +2,7 @@
 import { ref, defineModel, onMounted, nextTick } from 'vue'
 import { DEFAULT_OPERATION } from '@/constants/operations'
 import { DEFAULT_OPTIONS, DEFAULT_RESULTS } from '@/constants/options'
+import BinIcon from 'components/BinIcon/BinIcon.vue'
 import DangerButton from 'components/DangerButton/DangerButton.vue'
 import SecondaryButton from 'components/SecondaryButton/SecondaryButton.vue'
 
@@ -60,6 +61,10 @@ const scrollToTop = () => {
     }
 }
 
+const removeOrder = (index) => {
+    orders.value.splice(index, 1)
+}
+
 const copyOrderToClipboard = (index) => {
     navigator.clipboard.writeText(orders.value[index].name).then(() => {
         showCopyToast.value = true
@@ -90,6 +95,7 @@ const copyOrderToClipboard = (index) => {
                 <tr :class="bem({ element: 'HeaderRow' })">
                     <th>{{ $t('orders-table.order.name') }}</th>
                     <th>{{ $t('orders-table.order.price') }}</th>
+                    <th>{{ $t('orders-table.order.actions') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -100,9 +106,12 @@ const copyOrderToClipboard = (index) => {
                     <td :class="bem({ element: 'OrderPrice' })">
                         {{ order.price }}
                     </td>
+                    <td :class="bem({ element: 'OrderActions' })">
+                        <BinIcon @click="removeOrder(index)" />
+                    </td>
                 </tr>
                 <tr v-if="orders.length === 0" :class="bem({ element: 'EmptyRow' })">
-                    <td colspan="2" :class="bem({ element: 'EmptyMessage' })">
+                    <td colspan="3" :class="bem({ element: 'EmptyMessage' })">
                         {{ $t('orders-table.empty') }}
                     </td>
                 </tr>

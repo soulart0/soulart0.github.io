@@ -118,7 +118,8 @@
         },
         "order": {
             "name": "Order Name",
-            "price": "Total Price"
+            "price": "Total Price",
+            "actions": "Actions"
         },
         "empty": "No orders yet."
     }
